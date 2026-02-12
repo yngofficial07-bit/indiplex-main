@@ -72,9 +72,9 @@
         .card h3 { position: relative; z-index: 2; font-size: 14px; padding: 12px; text-align: center; margin: 0; background: #000; border-radius: 0 0 12px 12px; }
 
         /* --- MODALS --- */
-        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
+        #details-overlay, #about-modal { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
-        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; }
+        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; box-shadow: 0 0 30px rgba(229,9,20,0.2); }
         .modal-box input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; outline: none; box-sizing: border-box; }
         #countdown { font-size: 55px; font-weight: 900; color: var(--red); margin: 15px 0; }
         #play-after-ad { display: none; background: var(--red); color: white; border: none; padding: 15px 0; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
@@ -96,9 +96,23 @@
 
 <div id="side-menu">
     <div onclick="toggleMenu()" style="position:absolute; top:20px; right:20px; font-size:30px; cursor:pointer;">&times;</div>
-    <div class="menu-item" onclick="location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="alert('Indiplex v2.0 - Premium Streaming')"><i class="fa fa-info-circle"></i> About</div>
+    <div class="menu-item" onclick="toggleMenu(); location.reload()"><i class="fa fa-home"></i> Home</div>
+    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-info-circle"></i> About</div>
     <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-sign-out-alt"></i> Logout Admin</div>
+</div>
+
+<div id="about-modal">
+    <div onclick="toggleAbout()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red); z-index:9000;">&times;</div>
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center;">
+        <h1 style="font-family:'Montserrat'; font-size:3rem; color:var(--red); margin-bottom:10px;">INDIPLEX</h1>
+        <p style="letter-spacing:5px; color:#888; margin-bottom:40px;">YOUR PRIVACY IS OUR RESPONSIBILITY</p>
+        <div style="background:rgba(255,255,255,0.05); padding:30px; border-radius:20px; border:1px solid var(--glass-border); max-width:500px;">
+            <p style="font-size:18px; line-height:1.6;">Experience cinema like never before. High quality streaming with no compromise on security.</p>
+            <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
+            <p style="font-size:14px; color:#555;">Developed by</p>
+            <h2 style="font-family:'Montserrat'; letter-spacing:3px; color:#fff;">Y07</h2>
+        </div>
+    </div>
 </div>
 
 <div id="home-page">
@@ -156,9 +170,16 @@
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0 });
     }, 6000);
 
-    // Side Menu Toggle
-    function toggleMenu() {
-        document.getElementById('side-menu').classList.toggle('active');
+    function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
+    
+    function toggleAbout() {
+        const about = document.getElementById('about-modal');
+        if(about.style.display === 'block') {
+            about.style.display = 'none';
+        } else {
+            about.style.display = 'block';
+            document.getElementById('side-menu').classList.remove('active');
+        }
     }
 
     function logoutAdmin() {
