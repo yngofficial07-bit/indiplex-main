@@ -51,7 +51,7 @@
         .search-wrapper input:focus { width: 180px; border-color: var(--red); }
         .menu-btn { font-size: 24px; cursor: pointer; color: #fff; }
 
-        /* --- 3. SIDE MENU --- */
+        /* --- 3. SIDE MENU (FIXED) --- */
         #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 100px 40px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
         #side-menu.active { right: 0; }
         .menu-item { padding: 20px 0; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
@@ -106,6 +106,19 @@
     <div class="container" id="main-grid"></div>
 </div>
 
+<div id="side-menu">
+    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
+    <div class="menu-item" onclick="location.reload()">
+        <i class="fa-solid fa-house"></i> HOME
+    </div>
+    <div class="menu-item" onclick="alert('Developer & Owner: Y07')">
+        <i class="fa-solid fa-circle-info"></i> ABOUT
+    </div>
+    <div class="menu-item" onclick="logoutAdmin()">
+        <i class="fa-solid fa-right-from-bracket"></i> ADMIN LOGOUT
+    </div>
+</div>
+
 <div id="details-overlay">
     <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red);">&times;</div>
     <div id="details-body"></div>
@@ -117,6 +130,7 @@
         <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
         <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
         <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer; font-weight:900;">ACCESS</button>
+        <p onclick="document.getElementById('login-modal').style.display='none'" style="margin-top:10px; cursor:pointer; font-size:12px;">Close</p>
     </div>
 </div>
 
@@ -137,7 +151,7 @@
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
     }, 6000);
 
-    // ADMIN TRIGGER (RESTORED)
+    // ADMIN TRIGGER
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
@@ -146,8 +160,16 @@
 
     function checkLogin() {
         if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
-            localStorage.setItem("isAdmin", "true"); location.reload();
+            localStorage.setItem("isAdmin", "true"); 
+            alert("Admin Logged In");
+            location.reload();
         } else { alert("Denied."); }
+    }
+
+    function logoutAdmin() {
+        localStorage.removeItem("isAdmin");
+        alert("Admin Logged Out");
+        location.reload();
     }
 
     const database = [ mirzapurData, moneyHeistData ];
@@ -178,7 +200,6 @@
         document.getElementById('details-overlay').style.display = 'block';
     }
 
-    // ✅ DIRECT PLAY - ADS WILL LOAD AUTOMATICALLY FROM THE SCRIPTS IN HEAD
     function playVid(url) {
         document.getElementById('details-overlay').style.display = 'none';
         document.getElementById('video-frame').src = url; 
