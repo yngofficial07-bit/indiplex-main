@@ -17,13 +17,14 @@
 
         :root { 
             --red: #ff0000; 
+            --neon-blue: #00d2ff;
             --glass: rgba(255, 255, 255, 0.05); 
             --glass-border: rgba(255, 255, 255, 0.1);
         }
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- RESTORED: LUXURY INTRO & MOTTO --- */
+        /* --- 1. LUXURY INTRO & MOTTO --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
@@ -34,33 +35,42 @@
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- RESTORED: SIDE MENU --- */
-        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 100px 40px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
-        #side-menu.active { right: 0; }
-        .menu-item { padding: 20px 0; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
-        .menu-item:hover { color: #fff; padding-left: 10px; border-bottom-color: var(--red); }
-
-        /* --- NAVIGATION --- */
+        /* --- 2. PREMIUM NAV --- */
         nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border); }
-        .logo-nav { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; background: linear-gradient(to bottom, #fff 30%, #ff0000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; cursor: pointer; }
+        .logo-nav { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; background: linear-gradient(to bottom, #fff 30%, #ff0000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; cursor: pointer; filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .search-wrapper input { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 8px; color: #fff; outline: none; width: 120px; transition: 0.4s; }
         .search-wrapper input:focus { width: 180px; border-color: var(--red); }
 
-        /* --- RGB CARDS --- */
+        /* --- 3. SIDE MENU (WITH ABOUT & CREDIT) --- */
+        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 80px 30px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
+        #side-menu.active { right: 0; }
+        .menu-item { padding: 18px 0; font-size: 13px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
+        .menu-item:hover { color: #fff; border-bottom-color: var(--red); }
+        .about-box { margin-top: 30px; font-size: 11px; color: #555; line-height: 1.6; border-top: 1px solid #222; padding-top: 20px; }
+
+        /* --- 4. RGB NEON CARDS (MOVING STRIPS) --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 120px; }
-        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 40px; }
-        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 2px; transition: 0.5s; }
-        .card:hover { transform: scale(1.05); }
-        .card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, #ff0000, #00d2ff, #7a00ff, #ff0000); animation: rotateBorder 4s linear infinite; z-index: -2; }
+        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 40px; }
+        
+        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 3px; transition: 0.5s; }
+        .card:hover { transform: scale(1.05); filter: brightness(1.2); }
+        
+        /* THE MOVING NEON STRIP LOGIC */
+        .card::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--red), var(--neon-blue), var(--red), transparent);
+            animation: rotateStrip 4s linear infinite; z-index: -2;
+        }
         .card::after { content: ""; position: absolute; inset: 4px; background: #000; border-radius: 17px; z-index: -1; }
-        @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 17px 17px 0 0; }
-        .card h3 { font-size: 15px; font-family: 'Montserrat'; padding: 15px; text-align: center; margin: 0; background: #000; }
+        @keyframes rotateStrip { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- MODALS --- */
-        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
+        .card img { width: 100%; height: 300px; object-fit: cover; border-radius: 17px 17px 0 0; }
+        .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 900; padding: 15px; text-align: center; margin: 0; background: #000; color: #fff; letter-spacing: 1px; }
+
+        /* --- 5. MODALS --- */
+        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.99); backdrop-filter:blur(40px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
         #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
         .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
@@ -83,7 +93,7 @@
         <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
         <div class="nav-right">
             <div class="search-wrapper"><input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()"></div>
-            <div class="menu-btn" onclick="toggleMenu()" style="cursor:pointer;"><i class="fa-solid fa-bars-staggered"></i></div>
+            <div class="menu-btn" onclick="toggleMenu()" style="cursor:pointer; font-size:24px;"><i class="fa-solid fa-bars-staggered"></i></div>
         </div>
     </nav>
     <div class="container" id="main-grid"></div>
@@ -92,7 +102,14 @@
 <div id="side-menu">
     <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
     <div class="menu-item" onclick="location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="document.getElementById('login-modal').style.display='flex'"><i class="fa fa-user"></i> Admin</div>
+    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-info-circle"></i> About Project</div>
+    <div class="menu-item" onclick="document.getElementById('login-modal').style.display='flex'"><i class="fa fa-lock"></i> Admin Console</div>
+    
+    <div class="about-box" id="about-text">
+        <strong>MOTIVE:</strong> To provide a secure, ad-responsive aesthetic cinema experience without compromising user privacy. <br><br>
+        <strong>CREDITS:</strong> Developed by INDIPLEX Team. <br>
+        <strong>VERSION:</strong> 3.0 (Premium)
+    </div>
 </div>
 
 <div id="details-overlay">
@@ -102,10 +119,10 @@
 
 <div id="login-modal">
     <div class="modal-box">
-        <h2 style="color:var(--red); font-family:'Orbitron';">ADMIN</h2>
+        <h2 style="color:var(--red); font-family:'Orbitron';">AUTHENTICATION</h2>
         <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
         <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer;">ACCESS</button>
+        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer; font-weight:bold;">ACCESS</button>
     </div>
 </div>
 
@@ -120,12 +137,15 @@
 <script>
     let clicks = 0;
 
-    // --- INTRO & VANTA ---
-    setTimeout(() => { 
-        document.getElementById('intro').classList.add('hide'); 
-        document.getElementById('home-page').style.display = 'block';
-        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
-    }, 6000);
+    // --- INITIALIZE ---
+    window.onload = () => {
+        setTimeout(() => { 
+            document.getElementById('intro').classList.add('hide'); 
+            document.getElementById('home-page').style.display = 'block';
+            VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
+        }, 6000);
+        displayContent(database);
+    };
 
     // --- ADMIN TRIGGER ---
     document.getElementById('adminTrigger').addEventListener('click', () => {
@@ -136,31 +156,34 @@
 
     function checkLogin() {
         if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
-            alert("Welcome Admin"); document.getElementById('login-modal').style.display = 'none';
-        } else { alert("Denied"); }
+            alert("Admin Access Granted"); document.getElementById('login-modal').style.display = 'none';
+        } else { alert("Access Denied"); }
     }
 
     const database = [ mirzapurData, moneyHeistData ];
+
     function displayContent(items) {
         const grid = document.getElementById('main-grid');
-        grid.innerHTML = '';
-        items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `<img src="${item.poster}"><h3>${item.title}</h3>`;
-            card.onclick = () => openDetails(item);
-            grid.appendChild(card);
-        });
-    }
-
-    function openDetails(item) {
-        let seasonHTML = item.seasons.map(s => `
-            <div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; color:#555; font-size:14px;">${s.name}</h3>
-                ${s.episodes.map(ep => `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`).join('')}
+        grid.innerHTML = items.map(item => `
+            <div class="card" onclick="openDetails('${item.title}')">
+                <img src="${item.poster}">
+                <h3>${item.title}</h3>
             </div>
         `).join('');
-        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'">${item.title}</h1>${seasonHTML}`;
+    }
+
+    function openDetails(title) {
+        const item = database.find(m => m.title === title);
+        let seasonHTML = item.seasons.map(s => `
+            <div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
+                <h3 style="font-family:'Orbitron'; color:#ff0000; font-size:14px; letter-spacing:2px;">${s.name}</h3>
+                ${s.episodes.map(ep => `
+                    <div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.05);" 
+                    onclick="playVid('${ep.link}')">${ep.title}</div>
+                `).join('')}
+            </div>
+        `).join('');
+        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'; letter-spacing:5px;">${item.title}</h1>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
     }
 
@@ -170,6 +193,10 @@
     }
 
     function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
+    function toggleAbout() { 
+        const txt = document.getElementById('about-text');
+        txt.style.color = (txt.style.color === 'white') ? '#555' : 'white';
+    }
     function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
     
@@ -177,8 +204,6 @@
         let term = document.getElementById('searchInput').value.toLowerCase();
         displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
     }
-
-    window.onload = () => { displayContent(database); };
 </script>
 </body>
 </html>
