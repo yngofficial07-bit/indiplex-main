@@ -14,14 +14,13 @@
 
         :root { 
             --red: #e50914; 
-            --neon: #ff0000;
             --glass: rgba(255, 255, 255, 0.1); 
             --glass-border: rgba(255, 255, 255, 0.15);
         }
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- TUMHARA ORIGINAL INTRO --- */
+        /* --- ORIGINAL INTRO --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
@@ -32,18 +31,14 @@
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- NAVBAR WITH NEON LOGO --- */
+        /* --- NAVBAR & NEON LOGO --- */
         nav { position: fixed; top: 0; width: 100%; height: 75px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); }
-        
         .logo-nav { 
-            font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: #fff; text-decoration: none; letter-spacing: 2px; cursor: pointer; user-select: none;
+            font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: #fff; text-decoration: none; cursor: pointer; user-select: none;
             text-shadow: 0 0 10px var(--red), 0 0 20px var(--red);
             animation: neonPulse 1.5s infinite alternate;
         }
-        @keyframes neonPulse {
-            0% { text-shadow: 0 0 5px var(--red), 0 0 10px var(--red); opacity: 0.8; }
-            100% { text-shadow: 0 0 15px var(--red), 0 0 30px var(--red), 0 0 40px #ff4d4d; opacity: 1; }
-        }
+        @keyframes neonPulse { 0% { opacity: 0.7; text-shadow: 0 0 5px var(--red); } 100% { opacity: 1; text-shadow: 0 0 20px var(--red), 0 0 30px #ff4d4d; } }
         
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; }
@@ -52,36 +47,35 @@
         .search-wrapper i { position: absolute; left: 12px; color: #888; }
         .menu-btn { font-size: 20px; cursor: pointer; color: #fff; }
 
-        /* --- NEON MOVING BOUNDARY CARDS --- */
+        /* --- PREMIUM RGB NEON FLOW CARDS --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 110px; }
         .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 35px; }
         
         .card { 
             position: relative; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; 
-            padding: 3px; /* Space for border */
-            background: linear-gradient(0deg, transparent, transparent);
+            padding: 2px; z-index: 0; transition: 0.3s;
         }
-        /* Moving Neon Border Effect */
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--red));
-            animation: rotateBorder 4s linear infinite;
+            background: conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            animation: rotateBorder 4s linear infinite; z-index: -2;
         }
         .card::after {
-            content: ""; position: absolute; inset: 3px; background: #000; border-radius: 12px; z-index: 1;
+            content: ""; position: absolute; inset: 3px; background: #000; border-radius: 13px; z-index: -1;
         }
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .card:hover::before { animation-duration: 2s; filter: brightness(1.3); }
         
-        .card-content { position: relative; z-index: 2; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; }
-        .card img { width: 100%; height: 260px; object-fit: cover; display: block; }
-        .card h3 { position: relative; z-index: 2; font-size: 14px; padding: 12px; text-align: center; margin: 0; background: #000; }
+        .card-img-box { position: relative; z-index: 2; width: 100%; height: 260px; overflow: hidden; border-radius: 12px 12px 0 0; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card h3 { position: relative; z-index: 2; font-size: 14px; padding: 12px; text-align: center; margin: 0; background: #000; border-radius: 0 0 12px 12px; }
 
         /* --- MODALS --- */
         #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
-        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; box-shadow: 0 0 20px rgba(229, 9, 20, 0.3); }
-        .modal-box input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; outline: none; }
+        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; }
+        .modal-box input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; outline: none; box-sizing: border-box; }
         #countdown { font-size: 55px; font-weight: 900; color: var(--red); margin: 15px 0; }
         #play-after-ad { display: none; background: var(--red); color: white; border: none; padding: 15px 0; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
@@ -121,7 +115,7 @@
 
 <div id="ad-gate">
     <div class="modal-box">
-        <h2 style="font-family:'Montserrat'; letter-spacing: 1px;">SYNCING SERVER</h2>
+        <h2 style="font-family:'Montserrat';">SYNCING SERVER</h2>
         <div id="countdown">15</div>
         <button id="play-after-ad" onclick="startMovie()">▶ PLAY NOW</button>
     </div>
@@ -149,14 +143,12 @@
     let currentVideoUrl = "";
     let clicks = 0;
 
-    // Intro Timing
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0 });
     }, 6000);
 
-    // Admin Control (5 clicks = Login, 10 clicks = Logout)
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
@@ -165,7 +157,9 @@
     });
 
     function checkLogin() {
-        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
+        const u = document.getElementById('admin-user').value;
+        const p = document.getElementById('admin-pass').value;
+        if(u === "Y07" && p === "secret123") {
             localStorage.setItem("isAdmin", "true");
             alert("Welcome Boss!"); location.reload();
         } else { alert("Access Denied!"); }
@@ -179,7 +173,7 @@
         items.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<div class="card-content"><img src="${item.poster}"></div><h3>${item.title}</h3>`;
+            card.innerHTML = `<div class="card-img-box"><img src="${item.poster}"></div><h3>${item.title}</h3>`;
             card.onclick = () => openDetails(item);
             grid.appendChild(card);
         });
@@ -209,8 +203,7 @@
             document.getElementById('countdown').innerText = t;
             document.getElementById('play-after-ad').style.display = 'none';
             const timer = setInterval(() => {
-                t--;
-                document.getElementById('countdown').innerText = t;
+                t--; document.getElementById('countdown').innerText = t;
                 if(t <= 0) { clearInterval(timer); document.getElementById('play-after-ad').style.display = 'block'; }
             }, 1000);
         }
@@ -224,7 +217,6 @@
 
     function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
-    
     function searchMovies() {
         let term = document.getElementById('searchInput').value.toLowerCase();
         displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
