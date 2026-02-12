@@ -7,7 +7,7 @@ const moneyHeistData = {
         {
             name: "Season 1 Combined ",
             episodes: [
-                { title: "watch online / download ", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25238/Money+Heist+S01+COMBINED+720p+NF+WEB-DL+DDP5.1+H+264+~VI.mkv?hash=AgADKA" }
+                { title: "watch online Season 1 Combined  / download ", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25238/Money+Heist+S01+COMBINED+720p+NF+WEB-DL+DDP5.1+H+264+~VI.mkv?hash=AgADKA" }
                 // Baaki episodes...
             ]
         }
