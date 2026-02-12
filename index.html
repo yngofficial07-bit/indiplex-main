@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>INDIPLEX | Premium Cinema</title>
+    <title>INDIPLEX | Aesthetic Cinema</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Montserrat:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Roboto:wght@300;400;700&family=Montserrat:wght@200;900&display=swap');
 
         :root { 
-            --red: #e50914; 
-            --glass: rgba(255, 255, 255, 0.1); 
-            --glass-border: rgba(255, 255, 255, 0.15);
+            --red: #ff0000; 
+            --neon-blue: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.05); 
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
@@ -31,49 +32,68 @@
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 2. NAVBAR & NEON LOGO --- */
-        nav { position: fixed; top: 0; width: 100%; height: 75px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); }
+        /* --- 2. PREMIUM AESTHETIC LOGO & NAV --- */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border); }
+        
         .logo-nav { 
-            font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: #fff; text-decoration: none; cursor: pointer; user-select: none;
-            text-shadow: 0 0 10px var(--red), 0 0 20px var(--red);
-            animation: neonPulse 1.5s infinite alternate;
+            font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; 
+            background: linear-gradient(to bottom, #fff 30%, #ff0000 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 4px; cursor: pointer; user-select: none;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
+            animation: logoFloat 3s ease-in-out infinite alternate;
         }
-        @keyframes neonPulse { 0% { opacity: 0.7; text-shadow: 0 0 5px var(--red); } 100% { opacity: 1; text-shadow: 0 0 20px var(--red), 0 0 30px #ff4d4d; } }
+        @keyframes logoFloat { 0% { filter: drop-shadow(0 0 5px rgba(255,0,0,0.4)); transform: translateY(0); } 100% { filter: drop-shadow(0 0 20px rgba(255,0,0,0.8)); transform: translateY(-2px); } }
         
         .nav-right { display: flex; align-items: center; gap: 20px; }
-        .search-wrapper input { background: var(--glass); border: 1px solid var(--glass-border); padding: 8px 15px 8px 35px; border-radius: 50px; color: #fff; outline: none; width: 100px; transition: 0.3s; }
-        .search-wrapper input:focus { width: 150px; border-color: var(--red); }
-        .menu-btn { font-size: 22px; cursor: pointer; color: #fff; }
+        .search-wrapper input { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 8px; color: #fff; outline: none; width: 120px; font-family: 'Montserrat'; transition: 0.4s; }
+        .search-wrapper input:focus { width: 200px; border-color: var(--red); background: rgba(255,255,255,0.1); }
+        .menu-btn { font-size: 24px; cursor: pointer; color: #fff; transition: 0.3s; }
+        .menu-btn:hover { color: var(--red); transform: rotate(90deg); }
 
         /* --- 3. SIDE MENU --- */
-        #side-menu { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 6000; transition: 0.4s; padding: 80px 30px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
+        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 100px 40px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
         #side-menu.active { right: 0; }
-        .menu-item { padding: 15px 0; font-size: 18px; border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s; color: #bbb; display: flex; align-items: center; gap: 15px; }
-        .menu-item:hover { color: var(--red); }
+        .menu-item { padding: 20px 0; font-size: 16px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
+        .menu-item:hover { color: #fff; padding-left: 10px; border-bottom-color: var(--red); }
 
-        /* --- 4. PREMIUM RGB NEON CARDS --- */
+        /* --- 4. RGB NEON CARDS --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
-        #home-page { display: none; position: relative; z-index: 10; padding-top: 110px; }
-        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 35px; }
+        #home-page { display: none; position: relative; z-index: 10; padding-top: 120px; }
+        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 40px; }
         
-        .card { position: relative; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; padding: 2px; z-index: 0; }
+        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 2px; z-index: 0; transition: 0.5s; }
+        .card:hover { transform: scale(1.05) translateY(-10px); }
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background: conic-gradient(from 0deg, transparent, #ff0000, #00d2ff, #7a00ff, #ff0000);
             animation: rotateBorder 4s linear infinite; z-index: -2;
         }
-        .card::after { content: ""; position: absolute; inset: 3px; background: #000; border-radius: 13px; z-index: -1; }
+        .card::after { content: ""; position: absolute; inset: 4px; background: #000; border-radius: 17px; z-index: -1; }
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .card-img-box { position: relative; z-index: 2; width: 100%; height: 260px; overflow: hidden; }
-        .card img { width: 100%; height: 100%; object-fit: cover; }
-        .card h3 { position: relative; z-index: 2; font-size: 14px; padding: 12px; text-align: center; margin: 0; background: #000; }
+        .card-img-box { position: relative; z-index: 2; width: 100%; height: 280px; overflow: hidden; border-radius: 17px 17px 0 0; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .card:hover img { filter: brightness(0.7); }
+        .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 700; padding: 15px; text-align: center; margin: 0; background: #000; letter-spacing: 1px; }
 
-        /* --- 5. MODALS (Details, About, Ad-Gate) --- */
-        #details-overlay, #about-modal { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
+        /* --- 5. UPDATED ABOUT MODAL --- */
+        #about-modal { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(50px); display:none; z-index:8000; padding:5%; }
+        .about-content { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        .about-logo { font-family: 'Orbitron'; font-size: 4rem; color: #fff; text-shadow: 0 0 20px var(--red); margin-bottom: 5px; }
+        .about-motive { font-family: 'Montserrat'; font-weight: 200; letter-spacing: 10px; color: #ff0000; margin-bottom: 50px; font-size: 0.8rem; }
+        .about-box { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid var(--glass-border); max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .about-text { font-family: 'Roboto'; font-weight: 300; font-size: 1.1rem; line-height: 1.8; color: #ccc; }
+        .dev-tag { margin-top: 30px; font-family: 'Montserrat'; color: #444; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; }
+        .dev-name { font-family: 'Orbitron'; font-size: 1.8rem; color: #fff; margin-top: 10px; letter-spacing: 5px; background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- OTHER MODALS --- */
+        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
-        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; }
-        #countdown { font-size: 60px; font-weight: 900; color: var(--red); margin: 15px 0; }
+        .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
+        #countdown { font-size: 70px; font-family: 'Orbitron'; font-weight: 900; color: var(--red); margin: 20px 0; }
         
         #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
     </style>
@@ -91,20 +111,23 @@
 <div id="vanta-canvas"></div>
 
 <div id="side-menu">
-    <div onclick="toggleMenu()" style="position:absolute; top:20px; right:20px; font-size:30px; cursor:pointer;">&times;</div>
+    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer; color:#555;">&times;</div>
     <div class="menu-item" onclick="toggleMenu(); location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-info-circle"></i> About</div>
-    <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-sign-out-alt"></i> Logout Admin</div>
+    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-layer-group"></i> About Vision</div>
+    <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-power-off"></i> System Exit</div>
 </div>
 
 <div id="about-modal">
-    <div onclick="toggleAbout()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red); z-index:9000;">&times;</div>
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center;">
-        <h1 style="font-family:'Montserrat'; font-size:3rem; color:var(--red); margin-bottom:10px;">INDIPLEX</h1>
-        <p style="letter-spacing:5px; color:#888; margin-bottom:40px;">YOUR PRIVACY IS OUR RESPONSIBILITY</p>
-        <div style="background:rgba(255,255,255,0.05); padding:30px; border-radius:20px; border:1px solid var(--glass-border); max-width:500px;">
-            <p style="font-size:14px; color:#555;">Developed by</p>
-            <h2 style="font-family:'Montserrat'; letter-spacing:3px; color:#fff;">Y07</h2>
+    <div onclick="toggleAbout()" style="position:fixed; top:30px; right:40px; font-size:45px; cursor:pointer; color:var(--red); z-index:9000;">&times;</div>
+    <div class="about-content">
+        <div class="about-logo">INDIPLEX</div>
+        <div class="about-motive">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
+        <div class="about-box">
+            <p class="about-text">
+                "We believe that entertainment should not come at the cost of your personal data. INDIPLEX is a sanctuary for cinema lovers who value high-end aesthetics and uncompromising security. Our mission is to provide a seamless, encrypted streaming experience."
+            </p>
+            <div class="dev-tag">Head Architect</div>
+            <div class="dev-name">Y07</div>
         </div>
     </div>
 </div>
@@ -116,7 +139,7 @@
             <div class="search-wrapper">
                 <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
             </div>
-            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></div>
         </div>
     </nav>
     <div class="container" id="main-grid"></div>
@@ -129,23 +152,23 @@
 
 <div id="ad-gate">
     <div class="modal-box">
-        <h2 style="font-family:'Montserrat';">SECURE LOADING...</h2>
+        <h2 style="font-family:'Montserrat'; letter-spacing:2px; font-size:14px; color:#555;">ENCRYPTING CONNECTION</h2>
         <div id="countdown">15</div>
-        <p style="color:#666; font-size:12px;">Server checking encryption...</p>
+        <p style="color:#333; font-size:10px; letter-spacing:1px;">DO NOT CLOSE THIS TAB</p>
     </div>
 </div>
 
 <div id="login-modal">
     <div class="modal-box">
-        <h2 style="color:var(--red); font-family:'Montserrat';">ADMIN ACCESS</h2>
-        <input type="text" id="admin-user" placeholder="Username" style="width:100%; padding:10px; margin:10px 0; background:#222; color:white; border:1px solid #444; border-radius:5px;">
-        <input type="password" id="admin-pass" placeholder="Password" style="width:100%; padding:10px; margin:10px 0; background:#222; color:white; border:1px solid #444; border-radius:5px;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:8px; cursor:pointer;">Login</button>
+        <h2 style="color:var(--red); font-family:'Orbitron'; letter-spacing:2px;">ADMIN</h2>
+        <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px; outline:none;">
+        <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px; outline:none;">
+        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:900; letter-spacing:2px;">ACCESS</button>
     </div>
 </div>
 
 <div id="player-ui">
-    <div onclick="closePlayer()" style="position:fixed; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-circle-left"></i></div>
+    <div onclick="closePlayer()" style="position:fixed; top:25px; left:25px; font-size:35px; color:white; cursor:pointer; z-index:30000; filter:drop-shadow(0 0 10px #000);"><i class="fa-solid fa-chevron-left"></i></div>
     <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
 </div>
 
@@ -159,28 +182,28 @@
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
-        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0 });
+        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12, maxDistance: 22, spacing: 16 });
     }, 6000);
 
     function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
     function toggleAbout() { 
         const about = document.getElementById('about-modal');
         about.style.display = (about.style.display === 'block') ? 'none' : 'block';
-        document.getElementById('side-menu').classList.remove('active');
+        if(about.style.display === 'block') document.getElementById('side-menu').classList.remove('active');
     }
-    function logoutAdmin() { localStorage.removeItem("isAdmin"); alert("Admin Off!"); location.reload(); }
+    function logoutAdmin() { localStorage.removeItem("isAdmin"); alert("System Logout."); location.reload(); }
 
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
         if(clicks === 10) { logoutAdmin(); }
-        setTimeout(() => { if(clicks !== 5 && clicks !== 10) clicks = 0; }, 4000);
+        setTimeout(() => { clicks = 0; }, 5000);
     });
 
     function checkLogin() {
         if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
             localStorage.setItem("isAdmin", "true"); location.reload();
-        } else { alert("Wrong!"); }
+        } else { alert("Access Denied."); }
     }
 
     const database = [ mirzapurData, moneyHeistData ];
@@ -199,36 +222,36 @@
     function openDetails(item) {
         let seasonHTML = '';
         item.seasons.forEach(s => {
-            seasonHTML += `<div style="margin-top:30px; border-left:4px solid var(--red); padding-left:20px;"><h3>${s.name}</h3>`;
+            seasonHTML += `<div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
+                <h3 style="font-family:'Orbitron'; letter-spacing:2px; color:#555; font-size:14px; margin-bottom:15px;">${s.name}</h3>`;
             s.episodes.forEach(ep => {
-                seasonHTML += `<div style="padding:15px; background:rgba(255,255,255,0.05); margin:8px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`;
+                seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer; font-family:'Montserrat'; font-size:13px; transition:0.3s; border:1px solid transparent;" 
+                onmouseover="this.style.borderColor='rgba(255,0,0,0.3)'; this.style.background='rgba(255,0,0,0.05)'"
+                onmouseout="this.style.borderColor='transparent'; this.style.background='rgba(255,255,255,0.03)'"
+                onclick="playVid('${ep.link}')">${ep.title} <i class="fa fa-play-circle" style="float:right; color:var(--red);"></i></div>`;
             });
             seasonHTML += `</div>`;
         });
-        document.getElementById('details-body').innerHTML = `<h1>${item.title}</h1><p>${item.description}</p>${seasonHTML}`;
+        document.getElementById('details-body').innerHTML = `
+            <h1 style="font-family:'Orbitron'; font-size:2.5rem; letter-spacing:3px;">${item.title}</h1>
+            <p style="color:#777; font-family:'Montserrat'; max-width:700px; line-height:1.6; margin-bottom:30px;">${item.description}</p>
+            ${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
     }
 
     function playVid(url) {
         currentVideoUrl = url;
         document.getElementById('details-overlay').style.display = 'none';
-        
         if (localStorage.getItem("isAdmin") === "true") {
             startMovie();
         } else {
-            // ADS TAB OPENS HERE
             window.open('https://your-adsterra-direct-link.com', '_blank'); 
-
             document.getElementById('ad-gate').style.display = 'flex';
             let t = 15;
             document.getElementById('countdown').innerText = t;
             const timer = setInterval(() => {
-                t--;
-                document.getElementById('countdown').innerText = t;
-                if(t <= 0) { 
-                    clearInterval(timer); 
-                    startMovie(); 
-                }
+                t--; document.getElementById('countdown').innerText = t;
+                if(t <= 0) { clearInterval(timer); startMovie(); }
             }, 1000);
         }
     }
