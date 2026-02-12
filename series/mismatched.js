@@ -1,6 +1,6 @@
 const mismatchedData = {
     title: "Mismatched",
-    poster: "https://iili.io/q9UuY5F.png", 
+    poster: "https://iili.io/q9iJvtV.th.png", 
     description: "Mismatched is an Indian Hindi-language romantic drama series on Netflix based on Sandhya Menon’s novel When Dimple Met Rishi. The show follows teenagers Dimple and Rishi navigating college, friendships, and romance. ",
     seasons: [
         {
