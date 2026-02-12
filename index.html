@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>INDIPLEX | Aesthetic Cinema</title>
     
+    <script src="https://pl28703128.effectivegatecpm.com/ff/63/3e/ff633ed807491685eb8ea72ff91c6441.js"></script>
+    <script src="https://pl28703227.effectivegatecpm.com/e0/da/81/e0da8134581e4f8447faee3f94c03c5c.js"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
@@ -71,15 +74,6 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 700; padding: 15px; text-align: center; margin: 0; background: #000; }
 
-        /* --- 5. PREMIUM ABOUT --- */
-        #about-modal { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(50px); display:none; z-index:8000; padding:5%; }
-        .about-content { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; }
-        .about-logo { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 0 0 20px var(--red); margin-bottom: 5px; }
-        .about-motive { font-family: 'Montserrat'; font-weight: 200; letter-spacing: 8px; color: #ff0000; margin-bottom: 40px; font-size: 0.7rem; }
-        .about-box { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid var(--glass-border); max-width: 600px; }
-        .about-text { font-size: 1.1rem; line-height: 1.8; color: #ccc; font-weight: 300; }
-        .dev-name { font-family: 'Orbitron'; font-size: 1.8rem; color: #fff; margin-top: 20px; letter-spacing: 5px; }
-
         /* --- MODALS --- */
         #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
@@ -99,26 +93,6 @@
 </div>
 
 <div id="vanta-canvas"></div>
-
-<div id="side-menu">
-    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
-    <div class="menu-item" onclick="toggleMenu(); location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-layer-group"></i> About Vision</div>
-    <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-power-off"></i> System Exit</div>
-</div>
-
-<div id="about-modal">
-    <div onclick="toggleAbout()" style="position:fixed; top:30px; right:40px; font-size:45px; cursor:pointer; color:var(--red); z-index:9000;">&times;</div>
-    <div class="about-content">
-        <div class="about-logo">INDIPLEX</div>
-        <div class="about-motive">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
-        <div class="about-box">
-            <p class="about-text">"Entertainment should be private. INDIPLEX is a sanctuary for cinema lovers who value high-end aesthetics and uncompromising security. Our mission is to provide a seamless, encrypted streaming experience."</p>
-            <div style="color:#444; margin-top:20px; letter-spacing:3px; font-size:12px;">DEVELOPED BY</div>
-            <div class="dev-name">Y07</div>
-        </div>
-    </div>
-</div>
 
 <div id="home-page">
     <nav>
@@ -140,18 +114,9 @@
 
 <div id="ad-gate">
     <div class="modal-box">
-        <h2 style="font-family:'Montserrat'; letter-spacing:2px; font-size:12px; color:#555;">SYNCING ENCRYPTED SERVER</h2>
+        <h2 style="font-family:'Montserrat'; letter-spacing:2px; font-size:12px; color:#555;">SECURITY CHECK IN PROGRESS</h2>
         <div id="countdown">15</div>
-        <p style="color:#222; font-size:10px;">AD WILL TRIGGER ON CLICK</p>
-    </div>
-</div>
-
-<div id="login-modal">
-    <div class="modal-box">
-        <h2 style="color:var(--red); font-family:'Orbitron'; letter-spacing:2px;">ADMIN</h2>
-        <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px;">
-        <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333; border-radius:8px;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:900;">ACCESS</button>
+        <p style="color:#222; font-size:10px;">PLEASE WAIT FOR REDIRECT</p>
     </div>
 </div>
 
@@ -165,34 +130,12 @@
 
 <script>
     let currentVideoUrl = "";
-    let clicks = 0;
 
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
     }, 6000);
-
-    function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-    function toggleAbout() { 
-        const about = document.getElementById('about-modal');
-        about.style.display = (about.style.display === 'block') ? 'none' : 'block';
-        if(about.style.display === 'block') document.getElementById('side-menu').classList.remove('active');
-    }
-    function logoutAdmin() { localStorage.removeItem("isAdmin"); alert("Admin Logout Success."); location.reload(); }
-
-    document.getElementById('adminTrigger').addEventListener('click', () => {
-        clicks++;
-        if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
-        if(clicks === 10) { logoutAdmin(); }
-        setTimeout(() => { clicks = 0; }, 5000);
-    });
-
-    function checkLogin() {
-        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
-            localStorage.setItem("isAdmin", "true"); location.reload();
-        } else { alert("Denied."); }
-    }
 
     const database = [ mirzapurData, moneyHeistData ];
     function displayContent(items) {
@@ -211,70 +154,40 @@
         let seasonHTML = '';
         item.seasons.forEach(s => {
             seasonHTML += `<div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; letter-spacing:2px; color:#555; font-size:14px; margin-bottom:15px;">${s.name}</h3>`;
+                <h3 style="font-family:'Orbitron'; color:#555; font-size:14px; margin-bottom:15px;">${s.name}</h3>`;
             s.episodes.forEach(ep => {
-                seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer; font-family:'Montserrat'; font-size:13px;" 
-                onclick="playVid('${ep.link}')">${ep.title} <i class="fa fa-play-circle" style="float:right; color:var(--red);"></i></div>`;
+                seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" 
+                onclick="playVid('${ep.link}')">${ep.title}</div>`;
             });
             seasonHTML += `</div>`;
         });
-        document.getElementById('details-body').innerHTML = `
-            <h1 style="font-family:'Orbitron'; font-size:2.5rem; letter-spacing:3px;">${item.title}</h1>
-            <p style="color:#777; font-family:'Montserrat'; max-width:700px; line-height:1.6;">${item.description}</p>
-            ${seasonHTML}`;
+        document.getElementById('details-body').innerHTML = `<h1>${item.title}</h1>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
     }
 
-    // --- YEHI HAI VO FUNCTION JO KAAM KAREGA ---
     function playVid(url) {
         currentVideoUrl = url;
         document.getElementById('details-overlay').style.display = 'none';
         
-        if (localStorage.getItem("isAdmin") === "true") {
-            startMovie();
-        } else {
-            // 1. Script load karo (Social Bar aur Popunder)
-            const scripts = [
-                "//pl28703128.effectivegatecpm.com/ff/63/3e/ff633ed807491685eb8ea72ff91c6441.js",
-                "//pl28703227.effectivegatecpm.com/e0/da/81/e0da8134581e4f8447faee3f94c03c5c.js"
-            ];
-            
-            scripts.forEach(src => {
-                let s = document.createElement('script');
-                s.src = src;
-                s.async = true;
-                document.body.appendChild(s);
-            });
+        // Timer show karo
+        document.getElementById('ad-gate').style.display = 'flex';
+        let t = 15;
+        document.getElementById('countdown').innerText = t;
 
-            // 2. Timer UI show karo
-            document.getElementById('ad-gate').style.display = 'flex';
-            let t = 15;
+        const timer = setInterval(() => {
+            t--; 
             document.getElementById('countdown').innerText = t;
-
-            const timer = setInterval(() => {
-                t--; 
-                document.getElementById('countdown').innerText = t;
-                if(t <= 0) { 
-                    clearInterval(timer); 
-                    startMovie(); 
-                }
-            }, 1000);
-        }
+            if(t <= 0) { 
+                clearInterval(timer); 
+                document.getElementById('ad-gate').style.display = 'none';
+                document.getElementById('video-frame').src = currentVideoUrl; 
+                document.getElementById('player-ui').style.display = 'block'; 
+            }
+        }, 1000);
     }
 
-    function startMovie() {
-        document.getElementById('ad-gate').style.display = 'none';
-        document.getElementById('video-frame').src = currentVideoUrl; 
-        document.getElementById('player-ui').style.display = 'block'; 
-    }
-
-    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
-    function searchMovies() {
-        let term = document.getElementById('searchInput').value.toLowerCase();
-        displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
-    }
-
+    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     window.onload = () => { displayContent(database); };
 </script>
 </body>
