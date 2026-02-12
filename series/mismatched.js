@@ -18,7 +18,7 @@ const mismatchedData = {
         {
             name: "Season 3",
             episodes: [
-                { title: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25419/Mismatched_2024_S03_COMBINED_720p_NF_WEB_DL_HINDI_AAC2_0_H_264_E.mkv?hash=AgAD4h" }
+                { title: "Season 3 Combined [Hindi]", link:  "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25419/Mismatched_2024_S03_COMBINED_720p_NF_WEB_DL_HINDI_AAC2_0_H_264_E.mkv?hash=AgAD4h" }
             ]
         }
       
