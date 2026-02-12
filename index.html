@@ -22,14 +22,13 @@
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- CINEMATIC DYNAMIC INTRO --- */
+        /* --- THEME 1: CINEMATIC DYNAMIC INTRO (Y07 REMOVED) --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
 
-        /* Netflix-style Dynamic Light Background */
         .intro-bg-lights {
             position: absolute; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.15) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%);
             filter: blur(80px); animation: ambientPulse 4s infinite alternate;
         }
         @keyframes ambientPulse {
@@ -39,46 +38,45 @@
 
         .intro-content { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 2; }
         .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 12vw, 8rem); font-weight: 900; color: #fff; letter-spacing: 15px; margin: 0; animation: luxuryGlow 3s ease-in-out forwards; }
-        .motto { font-size: 0.75rem; color: #888; letter-spacing: 8px; margin-top: 15px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1s; }
-        .y07-signature { font-family: 'Meow Script', cursive; font-size: clamp(3.5rem, 8vw, 5.5rem); color: #fff; padding-right: 25px; clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); animation: writeSign 1.8s forwards 2.8s; filter: drop-shadow(0 0 15px var(--red)); }
+        .motto { font-size: 0.75rem; color: #888; letter-spacing: 8px; margin-top: 20px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1.2s; }
 
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
-        @keyframes writeSign { 0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); } 100% { clip-path: polygon(-10% -10%, 115% -10%, 115% 115%, -10% 115%); } }
 
         /* --- GLASS NAVBAR --- */
         nav { 
             position: fixed; top: 0; width: 100%; height: 75px; z-index: 5000;
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 5%; box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(25px);
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--glass-border);
         }
         .logo-nav { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: var(--red); text-decoration: none; letter-spacing: 2px; }
 
-        /* SEARCH BAR GLASS EFFECT */
+        .nav-right { display: flex; align-items: center; gap: 25px; } /* Fixed Spacing */
+
         .search-wrapper { position: relative; display: flex; align-items: center; }
         .search-wrapper input {
             background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 12px 15px 12px 45px; border-radius: 50px; color: #fff;
-            width: 150px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); outline: none; font-size: 14px;
+            padding: 10px 15px 10px 45px; border-radius: 50px; color: #fff;
+            width: 140px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); outline: none; font-size: 14px;
         }
-        .search-wrapper input:focus { width: 280px; background: rgba(0,0,0,0.7); border-color: var(--red); box-shadow: 0 0 20px rgba(229, 9, 20, 0.3); }
+        .search-wrapper input:focus { width: 250px; background: rgba(0,0,0,0.7); border-color: var(--red); }
         .search-wrapper i { position: absolute; left: 18px; color: rgba(255,255,255,0.4); }
 
-        .menu-btn { font-size: 24px; cursor: pointer; color: white; transition: 0.3s; }
+        .menu-btn { font-size: 22px; cursor: pointer; color: white; transition: 0.3s; padding: 5px; }
+        .menu-btn:hover { color: var(--red); transform: scale(1.1); }
 
         /* --- PREMIUM SIDEBAR --- */
         #side-drawer {
             position: fixed; top: 0; right: -400px; width: 340px; height: 100%;
-            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(35px);
+            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(40px);
             z-index: 6000; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 80px 30px; border-left: 1px solid var(--glass-border);
         }
         #side-drawer.active { right: 0; }
         .close-drawer { position: absolute; top: 25px; right: 25px; font-size: 35px; cursor: pointer; color: var(--red); }
-        .owner-name { font-size: 48px; font-weight: 700; margin: 10px 0; font-family: 'Meow Script'; color: #fff; }
-        .motive-box { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 25px; border-radius: 20px; margin-top: 30px; }
+        .owner-name { font-size: 50px; font-weight: 700; margin: 10px 0; font-family: 'Meow Script'; color: #fff; }
 
         /* --- GRID --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
@@ -111,7 +109,6 @@
     <div class="intro-content">
         <h1 class="premium-name">INDIPLEX</h1>
         <div class="motto">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
-        <div class="sig-wrapper"><span class="y07-signature">Y07</span></div>
     </div>
 </div>
 
@@ -122,12 +119,12 @@
     <div style="text-align: center;">
         <div style="background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 12px; letter-spacing: 3px;">DEVELOPER & OWNER</div>
         <h2 class="owner-name">Y07</h2>
-        <div class="motive-box">
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 25px; border-radius: 20px; margin-top: 30px; text-align: left;">
             <h4 style="color:var(--red); margin:0 0 10px; font-family:'Montserrat';">OUR MISSION</h4>
             <p style="font-size:14px; line-height:1.7; color:#ccc; font-style:italic; font-family: 'Space Grotesk';">"Breaking the chains of paid subscriptions and data tracking. IndiPlex is a premium digital sanctuary built for freedom and privacy."</p>
         </div>
     </div>
-    <p style="position:absolute; bottom:30px; left:0; width:100%; text-align:center; font-size:10px; opacity:0.3; font-weight:bold;">ENGINE v8.7 STABLE // BUILD 2026</p>
+    <p style="position:absolute; bottom:30px; left:0; width:100%; text-align:center; font-size:10px; opacity:0.3; font-weight:bold;">ENGINE v8.7 STABLE // THEME 1</p>
 </div>
 
 <div id="home-page">
@@ -136,9 +133,9 @@
         <div class="nav-right">
             <div class="search-wrapper">
                 <i class="fa fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search movies..." onkeyup="searchMovies()">
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
             </div>
-            <div class="menu-btn" onclick="toggleSide()"><i class="fa-solid fa-bars-staggered"></i></div>
+            <div class="menu-btn" onclick="toggleSide()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
         </div>
     </nav>
     <div class="container" id="main-grid"></div>
@@ -158,7 +155,7 @@
 <script src="series/moneyheist.js"></script>
 
 <script>
-    // Intro Logic
+    // Theme 1 Logic
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
@@ -166,17 +163,11 @@
     }, 6000);
 
     function initVanta() {
-        VANTA.NET({
-            el: "#vanta-canvas",
-            mouseControls: true, touchControls: true,
-            color: 0xe50914, backgroundColor: 0x0,
-            points: 12.00, maxDistance: 20.00, spacing: 16.00
-        });
+        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0, points: 12.00, maxDistance: 20.00, spacing: 16.00 });
     }
 
     function toggleSide() { document.getElementById('side-drawer').classList.toggle('active'); }
 
-    // Grid & Movie Logic
     const database = [ mirzapurData, moneyHeistData ];
     const grid = document.getElementById('main-grid');
 
