@@ -40,7 +40,7 @@
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- NAVBAR & DRAWER --- */
+        /* --- UI ELEMENTS --- */
         nav { position: fixed; top: 0; width: 100%; height: 75px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); }
         .logo-nav { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: var(--red); text-decoration: none; letter-spacing: 2px; cursor: pointer; }
         .nav-right { display: flex; align-items: center; gap: 25px; }
@@ -72,15 +72,15 @@
         .card img { width: 100%; height: 260px; object-fit: cover; }
         .card h3 { font-size: 14px; padding: 15px; text-align: center; margin: 0; background: rgba(0,0,0,0.8); }
 
-        /* --- AD GATE & LOGIN --- */
+        /* --- MODALS --- */
         #login-modal, #ad-gate { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(10px); }
-        .login-content, .ad-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 320px; box-shadow: 0 0 30px rgba(229, 9, 20, 0.2); }
+        .login-content, .ad-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 320px; }
         .login-content input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; outline: none; box-sizing: border-box; }
         
         #countdown { font-size: 50px; font-weight: 900; color: var(--red); display: block; margin: 10px 0; }
         #play-after-ad { display: none; background: var(--red); color: white; border: none; padding: 18px 0; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; width: 100%; }
 
-        #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 10000; }
+        #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
     </style>
 </head>
 <body>
@@ -99,7 +99,7 @@
     <div class="close-drawer" onclick="toggleSide()">&times;</div>
     <div style="text-align: center;">
         <h2 class="owner-name">Y07</h2>
-        <p style="font-size:12px; color:var(--red); letter-spacing:2px;">DEVELOPER & OWNER</p>
+        <p style="font-size:12px; color:var(--red);">DEVELOPER & OWNER</p>
     </div>
 </div>
 
@@ -123,7 +123,7 @@
 </div>
 
 <div id="player-ui">
-    <div onclick="closePlayer()" style="position:fixed; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:10001;"><i class="fa-solid fa-circle-left"></i></div>
+    <div onclick="closePlayer()" style="position:fixed; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-circle-left"></i></div>
     <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
 </div>
 
@@ -139,7 +139,8 @@
 
 <div id="ad-gate">
     <div class="ad-box">
-        <h2 style="font-family:'Montserrat';">UNLOCKING...</h2>
+        <h2 style="font-family:'Montserrat';">SECURE STREAM</h2>
+        <p style="font-size:12px; color:#666;">Verifying your access...</p>
         <div id="countdown">15</div>
         <button id="play-after-ad" onclick="startMovie()">▶ PLAY NOW</button>
     </div>
@@ -151,7 +152,7 @@
 <script>
     let currentVideoUrl = "";
 
-    // 1. INTRO & THEME
+    // 1. INTRO
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
@@ -164,7 +165,7 @@
 
     function toggleSide() { document.getElementById('side-drawer').classList.toggle('active'); }
 
-    // 2. ADMIN LOGIN (5 CLICKS ON LOGO)
+    // 2. ADMIN SECRET
     let clickCount = 0;
     document.querySelector('.logo-nav').onclick = () => {
         clickCount++;
@@ -177,13 +178,13 @@
     function checkLogin() {
         if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
             localStorage.setItem("isAdmin", "true");
-            alert("Admin Access Granted!");
+            alert("Admin Active!");
             location.reload();
-        } else { alert("Denied!"); }
+        } else { alert("Error!"); }
     }
     function closeLogin() { document.getElementById('login-modal').style.display = 'none'; }
 
-    // 3. DATABASE HANDLING
+    // 3. DISPLAY
     const database = [ mirzapurData, moneyHeistData ]; 
 
     function displayContent(items) {
@@ -208,6 +209,7 @@
         item.seasons.forEach(s => {
             seasonHTML += `<div style="margin-top:30px; border-left:4px solid var(--red); padding-left:20px;"><h3>${s.name}</h3>`;
             s.episodes.forEach(ep => {
+                // FIXED: Direct call to playVid
                 seasonHTML += `<div style="padding:15px; background:rgba(255,255,255,0.05); margin:8px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`;
             });
             seasonHTML += `</div>`;
@@ -217,12 +219,17 @@
         document.body.style.overflow = 'hidden';
     }
 
-    // 4. BLACK SCREEN FIX LOGIC
+    // 4. THE ULTIMATE FIX
     function playVid(url) {
         currentVideoUrl = url;
+        
+        // Sabse pehle Details Overlay ko band karo taaki Timer dikhe!
+        document.getElementById('details-overlay').style.display = 'none';
+
         if (localStorage.getItem("isAdmin") === "true") {
             startMovie(); 
         } else {
+            // User ko timer dikhao
             document.getElementById('ad-gate').style.display = 'flex';
             let timeLeft = 15;
             document.getElementById('countdown').innerText = timeLeft;
@@ -239,10 +246,7 @@
     }
 
     function startMovie() {
-        // BLACK SCREEN FIX: Close overlays before showing player
         document.getElementById('ad-gate').style.display = 'none';
-        document.getElementById('details-overlay').style.display = 'none'; 
-        
         document.getElementById('video-frame').src = currentVideoUrl; 
         document.getElementById('player-ui').style.display = 'block'; 
     }
