@@ -42,30 +42,30 @@
         
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-wrapper input { background: var(--glass); border: 1px solid var(--glass-border); padding: 8px 15px 8px 35px; border-radius: 50px; color: #fff; outline: none; width: 120px; transition: 0.3s; }
-        .search-wrapper input:focus { width: 180px; border-color: var(--red); }
+        .search-wrapper input { background: var(--glass); border: 1px solid var(--glass-border); padding: 8px 15px 8px 35px; border-radius: 50px; color: #fff; outline: none; width: 100px; transition: 0.3s; }
+        .search-wrapper input:focus { width: 150px; border-color: var(--red); }
         .search-wrapper i { position: absolute; left: 12px; color: #888; }
-        .menu-btn { font-size: 20px; cursor: pointer; color: #fff; }
+        .menu-btn { font-size: 22px; cursor: pointer; color: #fff; padding: 5px; }
+
+        /* --- SIDE MENU --- */
+        #side-menu { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 6000; transition: 0.4s; padding: 80px 30px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
+        #side-menu.active { right: 0; }
+        .menu-item { padding: 15px 0; font-size: 18px; border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s; color: #bbb; display: flex; align-items: center; gap: 15px; }
+        .menu-item:hover { color: var(--red); padding-left: 10px; }
 
         /* --- PREMIUM RGB NEON FLOW CARDS --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 110px; }
         .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 35px; }
         
-        .card { 
-            position: relative; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; 
-            padding: 2px; z-index: 0; transition: 0.3s;
-        }
+        .card { position: relative; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; padding: 2px; z-index: 0; }
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
             animation: rotateBorder 4s linear infinite; z-index: -2;
         }
-        .card::after {
-            content: ""; position: absolute; inset: 3px; background: #000; border-radius: 13px; z-index: -1;
-        }
+        .card::after { content: ""; position: absolute; inset: 3px; background: #000; border-radius: 13px; z-index: -1; }
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .card:hover::before { animation-duration: 2s; filter: brightness(1.3); }
         
         .card-img-box { position: relative; z-index: 2; width: 100%; height: 260px; overflow: hidden; border-radius: 12px 12px 0 0; }
         .card img { width: 100%; height: 100%; object-fit: cover; }
@@ -94,6 +94,13 @@
 
 <div id="vanta-canvas"></div>
 
+<div id="side-menu">
+    <div onclick="toggleMenu()" style="position:absolute; top:20px; right:20px; font-size:30px; cursor:pointer;">&times;</div>
+    <div class="menu-item" onclick="location.reload()"><i class="fa fa-home"></i> Home</div>
+    <div class="menu-item" onclick="alert('Indiplex v2.0 - Premium Streaming')"><i class="fa fa-info-circle"></i> About</div>
+    <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-sign-out-alt"></i> Logout Admin</div>
+</div>
+
 <div id="home-page">
     <nav>
         <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
@@ -102,7 +109,7 @@
                 <i class="fa fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
             </div>
-            <div class="menu-btn"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
         </div>
     </nav>
     <div class="container" id="main-grid"></div>
@@ -149,17 +156,26 @@
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0 });
     }, 6000);
 
+    // Side Menu Toggle
+    function toggleMenu() {
+        document.getElementById('side-menu').classList.toggle('active');
+    }
+
+    function logoutAdmin() {
+        localStorage.removeItem("isAdmin");
+        alert("Logged out from Admin Mode!");
+        location.reload();
+    }
+
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
-        if(clicks === 10) { localStorage.removeItem("isAdmin"); alert("Admin Mode Off!"); location.reload(); }
+        if(clicks === 10) { logoutAdmin(); }
         setTimeout(() => { if(clicks != 5 && clicks != 10) clicks = 0; }, 4000);
     });
 
     function checkLogin() {
-        const u = document.getElementById('admin-user').value;
-        const p = document.getElementById('admin-pass').value;
-        if(u === "Y07" && p === "secret123") {
+        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
             localStorage.setItem("isAdmin", "true");
             alert("Welcome Boss!"); location.reload();
         } else { alert("Access Denied!"); }
