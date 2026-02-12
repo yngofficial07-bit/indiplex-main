@@ -24,7 +24,7 @@
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- 1. LUXURY INTRO (RESTORED) --- */
+        /* --- 1. ORIGINAL INTRO --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
@@ -35,7 +35,7 @@
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 2. PREMIUM NAV & LOGO --- */
+        /* --- 2. PREMIUM LOGO & NAV --- */
         nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border); }
         .logo-nav { 
             font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; 
@@ -45,19 +45,19 @@
             filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
             animation: logoFloat 3s ease-in-out infinite alternate;
         }
-        @keyframes logoFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-3px); } }
+        @keyframes logoFloat { 0% { filter: drop-shadow(0 0 5px rgba(255,0,0,0.4)); transform: translateY(0); } 100% { filter: drop-shadow(0 0 20px rgba(255,0,0,0.8)); transform: translateY(-2px); } }
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .search-wrapper input { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 8px; color: #fff; outline: none; width: 120px; transition: 0.4s; }
         .search-wrapper input:focus { width: 180px; border-color: var(--red); }
         .menu-btn { font-size: 24px; cursor: pointer; color: #fff; }
 
-        /* --- 3. SIDE MENU (RESTORED) --- */
+        /* --- 3. SIDE MENU --- */
         #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 100px 40px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
         #side-menu.active { right: 0; }
         .menu-item { padding: 20px 0; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
         .menu-item:hover { color: #fff; padding-left: 10px; border-bottom-color: var(--red); }
 
-        /* --- 4. RGB NEON CARDS & VANTA --- */
+        /* --- 4. RGB NEON CARDS --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 120px; }
         .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 40px; }
@@ -74,11 +74,9 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 700; padding: 15px; text-align: center; margin: 0; background: #000; }
 
-        /* --- 5. DETAILS & PLAYER (CLEAN) --- */
+        /* --- 5. MODALS --- */
         #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
-        
-        /* LOGIN MODAL (RESTORED) */
         #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
         .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
     </style>
@@ -108,12 +106,6 @@
     <div class="container" id="main-grid"></div>
 </div>
 
-<div id="side-menu">
-    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
-    <div class="menu-item" onclick="toggleMenu(); location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="logoutAdmin()"><i class="fa fa-power-off"></i> System Exit</div>
-</div>
-
 <div id="details-overlay">
     <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red);">&times;</div>
     <div id="details-body"></div>
@@ -124,7 +116,7 @@
         <h2 style="color:var(--red); font-family:'Orbitron';">ADMIN</h2>
         <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
         <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer;">ACCESS</button>
+        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer; font-weight:900;">ACCESS</button>
     </div>
 </div>
 
@@ -139,14 +131,13 @@
 <script>
     let clicks = 0;
 
-    // --- 1. INTRO & VANTA ---
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
         VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
     }, 6000);
 
-    // --- 2. ADMIN SYSTEM (RESTORED) ---
+    // ADMIN TRIGGER (RESTORED)
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
@@ -158,9 +149,7 @@
             localStorage.setItem("isAdmin", "true"); location.reload();
         } else { alert("Denied."); }
     }
-    function logoutAdmin() { localStorage.removeItem("isAdmin"); location.reload(); }
 
-    // --- 3. CORE LOGIC ---
     const database = [ mirzapurData, moneyHeistData ];
     function displayContent(items) {
         const grid = document.getElementById('main-grid');
@@ -178,17 +167,18 @@
         let seasonHTML = '';
         item.seasons.forEach(s => {
             seasonHTML += `<div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; color:#555; font-size:14px;">${s.name}</h3>`;
+                <h3 style="font-family:'Orbitron'; color:#555; font-size:14px; margin-bottom:15px;">${s.name}</h3>`;
             s.episodes.forEach(ep => {
                 seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" 
                 onclick="playVid('${ep.link}')">${ep.title}</div>`;
             });
             seasonHTML += `</div>`;
         });
-        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'; font-size:2.5rem;">${item.title}</h1><p style="color:#777;">${item.description}</p>${seasonHTML}`;
+        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'">${item.title}</h1>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
     }
 
+    // ✅ DIRECT PLAY - ADS WILL LOAD AUTOMATICALLY FROM THE SCRIPTS IN HEAD
     function playVid(url) {
         document.getElementById('details-overlay').style.display = 'none';
         document.getElementById('video-frame').src = url; 
@@ -196,9 +186,8 @@
     }
 
     function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
-    
+    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function searchMovies() {
         let term = document.getElementById('searchInput').value.toLowerCase();
         displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
