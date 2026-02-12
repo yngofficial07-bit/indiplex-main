@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>INDIPLEX | Aesthetic Cinema</title>
     
-    <script src="https://pl28703128.effectivegatecpm.com/ff/63/3e/ff633ed807491685eb8ea72ff91c6441.js"></script>
-    <script src="https://pl28703227.effectivegatecpm.com/e0/da/81/e0da8134581e4f8447faee3f94c03c5c.js"></script>
+    <script type='text/javascript' src='//pl28703128.effectivegatecpm.com/ff/63/3e/ff633ed807491685eb8ea72ff91c6441.js'></script>
+    <script type='text/javascript' src='//pl28703227.effectivegatecpm.com/e0/da/81/e0da8134581e4f8447faee3f94c03c5c.js'></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
@@ -15,109 +15,107 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Roboto:wght@300;400;700&family=Montserrat:wght@200;900&display=swap');
 
-        :root { --red: #ff0000; --neon-blue: #00d2ff; --glass-border: rgba(255, 255, 255, 0.1); }
+        :root { --red: #ff0000; --neon-blue: #00d2ff; --glass: rgba(255,255,255,0.05); }
         
-        body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
+        body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
 
-        /* --- 1. ORIGINAL LUXURY INTRO --- */
-        #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
+        /* --- LUXURY INTRO --- */
+        #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: 1.2s; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-        .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
-        .intro-content { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 2; }
-        .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 12vw, 8rem); font-weight: 900; color: #fff; letter-spacing: 15px; margin: 0; animation: luxuryGlow 3s ease-in-out forwards; }
-        .motto { font-size: 0.75rem; color: #888; letter-spacing: 8px; margin-top: 20px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1.2s; }
-        @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
-        @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
-        @keyframes ambientPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.2); opacity: 0.8; } }
+        .intro-content { text-align: center; z-index: 2; }
+        .premium-name { font-family: 'Montserrat'; font-size: clamp(3rem, 10vw, 7rem); font-weight: 900; letter-spacing: 12px; color: var(--red); animation: glow 3s infinite alternate; }
+        .motto { font-size: 0.7rem; color: #888; letter-spacing: 6px; margin-top: 20px; opacity: 0; animation: fadeIn 2s forwards 1.5s; }
+        @keyframes glow { from { filter: drop-shadow(0 0 10px #ff0000); } to { filter: drop-shadow(0 0 30px #ff0000); } }
+        @keyframes fadeIn { to { opacity: 1; } }
 
-        /* --- 2. PREMIUM NAV --- */
-        nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border); }
-        .logo-nav { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; background: linear-gradient(to bottom, #fff 30%, #ff0000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; cursor: pointer; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)); }
+        /* --- NAVIGATION --- */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 8000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+        .logo { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(20px, 5vw, 30px); cursor: pointer; background: linear-gradient(#fff, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* --- 3. SIDE MENU & ABOUT --- */
-        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s; padding: 100px 40px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
-        #side-menu.active { right: 0; }
-        .menu-item { padding: 20px 0; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; }
-        .menu-item:hover { color: #fff; padding-left: 10px; border-bottom-color: var(--red); }
-        .about-box { margin-top: 30px; font-size: 11px; color: #555; line-height: 1.6; border-top: 1px solid #222; padding-top: 20px; }
+        /* --- SIDEBAR --- */
+        #sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.95); z-index: 9000; transition: 0.5s; padding: 100px 30px; box-sizing: border-box; border-left: 1px solid var(--red); }
+        #sidebar.active { right: 0; }
+        .side-item { padding: 20px 0; border-bottom: 1px solid #222; color: #888; cursor: pointer; font-family: 'Montserrat'; font-size: 13px; letter-spacing: 2px; }
+        .side-item:hover { color: #fff; border-bottom-color: var(--red); }
+        .about-section { margin-top: 40px; font-size: 11px; color: #555; line-height: 1.8; }
 
-        /* --- 4. NEON MOVING STRIP CARDS --- */
-        #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
-        #home-page { display: none; position: relative; z-index: 10; padding-top: 120px; }
-        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 40px; }
+        /* --- NEON CARDS --- */
+        #vanta-bg { position: fixed; inset: 0; z-index: -1; } /* Vanta moved to extreme back */
+        #main-content { display: none; padding-top: 120px; position: relative; z-index: 10; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 35px; padding: 0 5% 100px; }
         
-        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 2px; z-index: 0; transition: 0.5s; }
-        .card:hover { transform: scale(1.05); }
+        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 3px; }
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(from 0deg, transparent, var(--red), var(--neon-blue), var(--red), transparent);
-            animation: rotateBorder 4s linear infinite; z-index: -2;
+            animation: rotate 4s linear infinite; z-index: -1;
         }
-        .card::after { content: ""; position: absolute; inset: 4px; background: #000; border-radius: 17px; z-index: -1; }
-        @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 17px 17px 0 0; }
-        .card h3 { font-size: 15px; font-family: 'Montserrat'; font-weight: 700; padding: 15px; text-align: center; margin: 0; background: #000; }
+        .card::after { content: ""; position: absolute; inset: 5px; background: #000; border-radius: 15px; z-index: -1; }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        
+        .card img { width: 100%; height: 280px; object-fit: cover; border-radius: 15px 15px 0 0; }
+        .card h3 { padding: 15px; text-align: center; margin: 0; font-size: 14px; font-family: 'Montserrat'; }
 
-        /* --- 5. MODALS --- */
-        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
-        #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
-        #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
-        .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
+        /* --- OVERLAYS --- */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; display: none; padding: 80px 5%; overflow-y: auto; }
+        #player-ui { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; }
+        #login-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 25000; display: none; justify-content: center; align-items: center; }
+        .modal-box { background: #111; padding: 40px; border: 1px solid var(--red); border-radius: 20px; text-align: center; width: 300px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #000; color: #fff; border: 1px solid #333; border-radius: 5px; outline: none; }
     </style>
 </head>
 <body>
 
 <div id="intro">
-    <div class="intro-bg-lights"></div>
     <div class="intro-content">
         <h1 class="premium-name">INDIPLEX</h1>
-        <div class="motto">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
+        <p class="motto">YOUR PRIVACY IS OUR RESPONSIBILITY</p>
     </div>
 </div>
 
-<div id="vanta-canvas"></div>
+<div id="vanta-bg"></div>
 
-<div id="home-page">
+<div id="main-content">
     <nav>
-        <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
-        <div class="nav-right">
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); padding:10px; border-radius:8px; color:#fff; outline:none;">
-            </div>
-            <div onclick="toggleMenu()" style="cursor:pointer; font-size:24px; color:#fff;"><i class="fa-solid fa-bars-staggered"></i></div>
+        <div class="logo" id="adminTrigger">INDIPLEX</div>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <input type="text" id="search" placeholder="Search..." onkeyup="search()" style="width:120px; margin:0; padding:8px;">
+            <div onclick="toggleSidebar()" style="cursor:pointer; font-size:24px;"><i class="fa-solid fa-bars-staggered"></i></div>
         </div>
     </nav>
-    <div class="container" id="main-grid"></div>
+    <div class="grid" id="grid"></div>
 </div>
 
-<div id="side-menu">
-    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
-    <div class="menu-item" onclick="location.reload()">HOME</div>
-    <div class="menu-item" onclick="document.getElementById('login-modal').style.display='flex'">ADMIN LOGIN</div>
-    <div class="about-box">
-        <strong>MOTIVE:</strong> Secure Aesthetic Cinema Experience.<br><br>
-        <strong>CREDITS:</strong> INDIPLEX TEAM <br>
-        <strong>VERSION:</strong> 6.0 Stable
+<div id="sidebar">
+    <div onclick="toggleSidebar()" style="float:right; font-size:30px; cursor:pointer;">&times;</div>
+    <div style="clear:both; height:40px;"></div>
+    <div class="side-item" onclick="location.reload()">HOME</div>
+    <div class="side-item" onclick="alert('Logged Out Successfully')">LOGOUT</div>
+    
+    <div class="about-section">
+        <strong>MOTIVE:</strong> Pure Aesthetic & Secure Cinema. <br><br>
+        <strong>CREDIT:</strong> INDIPLEX TEAM <br>
+        <strong>VERSION:</strong> 7.0 (Final Stable)
     </div>
 </div>
 
 <div id="login-modal">
     <div class="modal-box">
-        <h2 style="color:var(--red); font-family:'Orbitron';">ADMIN LOGIN</h2>
-        <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer; font-weight:900;">ACCESS</button>
-        <p onclick="document.getElementById('login-modal').style.display='none'" style="font-size:12px; cursor:pointer; margin-top:15px; color:#555;">CLOSE</p>
+        <h3 style="color:var(--red); font-family:'Orbitron';">ADMIN ACCESS</h3>
+        <input type="text" id="user" placeholder="Admin ID">
+        <input type="password" id="pass" placeholder="Secret Key">
+        <button onclick="auth()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">ENTER</button>
+        <p onclick="closeLogin()" style="margin-top:15px; font-size:12px; color:#555; cursor:pointer;">CANCEL</p>
     </div>
 </div>
 
-<div id="details-overlay">
+<div id="details" class="overlay">
     <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red);">&times;</div>
-    <div id="details-body"></div>
+    <div id="details-content"></div>
 </div>
 
 <div id="player-ui">
-    <div onclick="closePlayer()" style="position:fixed; top:25px; left:25px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-chevron-left"></i></div>
+    <div onclick="closePlayer()" style="position:fixed; top:25px; left:25px; font-size:30px; color:white; cursor:pointer; z-index:21000;"><i class="fa-solid fa-chevron-left"></i></div>
     <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
 </div>
 
@@ -126,64 +124,66 @@
 
 <script>
     let clicks = 0;
+    const database = [ mirzapurData, moneyHeistData ];
 
-    // --- SETUP & VANTA ---
+    // --- SETUP ---
     window.onload = () => {
-        setTimeout(() => { 
-            document.getElementById('intro').classList.add('hide'); 
-            document.getElementById('home-page').style.display = 'block';
-            VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
-        }, 6000);
-        displayContent(database);
+        setTimeout(() => {
+            document.getElementById('intro').classList.add('hide');
+            document.getElementById('main-content').style.display = 'block';
+            VANTA.NET({ el: "#vanta-bg", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 10 });
+        }, 5000);
+        render(database);
     };
 
-    // --- ADMIN TRIGGER (Restored Hidden Logic) ---
+    // --- ADMIN HIDDEN LOGIC ---
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
         setTimeout(() => { clicks = 0; }, 5000);
     });
 
-    function checkLogin() {
-        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
-            alert("Admin Verified"); document.getElementById('login-modal').style.display = 'none';
-        } else { alert("Access Denied"); }
+    function auth() {
+        if(document.getElementById('user').value === "Y07" && document.getElementById('pass').value === "secret123") {
+            alert("Admin Verified"); closeLogin();
+        } else { alert("Denied"); }
     }
 
-    const database = [ mirzapurData, moneyHeistData ];
-    function displayContent(items) {
-        const grid = document.getElementById('main-grid');
-        grid.innerHTML = items.map(item => `
-            <div class="card" onclick="openDetails('${item.title}')">
-                <img src="${item.poster}">
-                <h3>${item.title}</h3>
+    // --- FUNCTIONS ---
+    function render(data) {
+        document.getElementById('grid').innerHTML = data.map(m => `
+            <div class="card" onclick="show('${m.title}')">
+                <img src="${m.poster}">
+                <h3>${m.title}</h3>
             </div>
         `).join('');
     }
 
-    function openDetails(title) {
-        const item = database.find(m => m.title === title);
-        let seasonHTML = item.seasons.map(s => `
-            <div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; color:var(--red); font-size:14px;">${s.name}</h3>
-                ${s.episodes.map(ep => `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`).join('')}
-            </div>
-        `).join('');
-        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'">${item.title}</h1>${seasonHTML}`;
-        document.getElementById('details-overlay').style.display = 'block';
+    function show(title) {
+        const movie = database.find(m => m.title === title);
+        let html = `<h1>${movie.title}</h1>`;
+        movie.seasons.forEach(s => {
+            html += `<h3 style="color:var(--red); margin-top:30px;">${s.name}</h3>`;
+            s.episodes.forEach(e => {
+                html += `<div style="padding:15px; background:#111; margin:10px 0; border-radius:10px; cursor:pointer;" onclick="play('${e.link}')">${e.title}</div>`;
+            });
+        });
+        document.getElementById('details-content').innerHTML = html;
+        document.getElementById('details').style.display = 'block';
     }
 
-    function playVid(url) {
-        document.getElementById('video-frame').src = url; 
-        document.getElementById('player-ui').style.display = 'block'; 
+    function play(url) {
+        document.getElementById('video-frame').src = url;
+        document.getElementById('player-ui').style.display = 'block';
     }
 
-    function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    function closeDetails() { document.getElementById('details').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
-    function searchMovies() {
-        let term = document.getElementById('searchInput').value.toLowerCase();
-        displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
+    function closeLogin() { document.getElementById('login-modal').style.display = 'none'; }
+    function search() {
+        let q = document.getElementById('search').value.toLowerCase();
+        render(database.filter(m => m.title.toLowerCase().includes(q)));
     }
 </script>
 </body>
