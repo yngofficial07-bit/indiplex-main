@@ -74,12 +74,20 @@
         .card img { width: 100%; height: 100%; object-fit: cover; }
         .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 700; padding: 15px; text-align: center; margin: 0; background: #000; }
 
-        /* --- MODALS --- */
+        /* --- 5. PREMIUM ABOUT --- */
+        #about-modal { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(50px); display:none; z-index:8000; padding:5%; }
+        .about-content { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; }
+        .about-logo { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 0 0 20px var(--red); margin-bottom: 5px; }
+        .about-motive { font-family: 'Montserrat'; font-weight: 200; letter-spacing: 8px; color: #ff0000; margin-bottom: 40px; font-size: 0.7rem; }
+        .about-box { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid var(--glass-border); max-width: 600px; }
+        .about-text { font-size: 1.1rem; line-height: 1.8; color: #ccc; font-weight: 300; }
+        .dev-name { font-family: 'Orbitron'; font-size: 1.8rem; color: #fff; margin-top: 20px; letter-spacing: 5px; }
+
+        /* --- DETAILS & PLAYER --- */
         #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
-        #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
-        .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
-        #countdown { font-size: 70px; font-family: 'Orbitron'; font-weight: 900; color: var(--red); margin: 20px 0; }
         #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
+        #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
+        .modal-box { background: #0a0a0a; padding: 40px; border-radius: 25px; border: 1px solid var(--red); text-align: center; width: 320px; }
     </style>
 </head>
 <body>
@@ -94,13 +102,29 @@
 
 <div id="vanta-canvas"></div>
 
+<div id="side-menu">
+    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
+    <div class="menu-item" onclick="toggleMenu(); location.reload()"><i class="fa fa-home"></i> Home</div>
+    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-layer-group"></i> About Vision</div>
+</div>
+
+<div id="about-modal">
+    <div onclick="toggleAbout()" style="position:fixed; top:30px; right:40px; font-size:45px; cursor:pointer; color:var(--red); z-index:9000;">&times;</div>
+    <div class="about-content">
+        <div class="about-logo">INDIPLEX</div>
+        <div class="about-motive">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
+        <div class="about-box">
+            <p class="about-text">"Entertainment should be private. INDIPLEX is a sanctuary for cinema lovers."</p>
+            <div class="dev-name">Y07</div>
+        </div>
+    </div>
+</div>
+
 <div id="home-page">
     <nav>
         <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
         <div class="nav-right">
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
-            </div>
+            <div class="search-wrapper"><input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()"></div>
             <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></div>
         </div>
     </nav>
@@ -112,14 +136,6 @@
     <div id="details-body"></div>
 </div>
 
-<div id="ad-gate">
-    <div class="modal-box">
-        <h2 style="font-family:'Montserrat'; letter-spacing:2px; font-size:12px; color:#555;">SECURITY CHECK IN PROGRESS</h2>
-        <div id="countdown">15</div>
-        <p style="color:#222; font-size:10px;">PLEASE WAIT FOR REDIRECT</p>
-    </div>
-</div>
-
 <div id="player-ui">
     <div onclick="closePlayer()" style="position:fixed; top:25px; left:25px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-chevron-left"></i></div>
     <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
@@ -129,8 +145,7 @@
 <script src="series/moneyheist.js"></script>
 
 <script>
-    let currentVideoUrl = "";
-
+    // --- BASIC CONFIG ---
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
@@ -138,6 +153,7 @@
     }, 6000);
 
     const database = [ mirzapurData, moneyHeistData ];
+
     function displayContent(items) {
         const grid = document.getElementById('main-grid');
         grid.innerHTML = '';
@@ -153,11 +169,9 @@
     function openDetails(item) {
         let seasonHTML = '';
         item.seasons.forEach(s => {
-            seasonHTML += `<div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; color:#555; font-size:14px; margin-bottom:15px;">${s.name}</h3>`;
+            seasonHTML += `<div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;"><h3>${s.name}</h3>`;
             s.episodes.forEach(ep => {
-                seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" 
-                onclick="playVid('${ep.link}')">${ep.title}</div>`;
+                seasonHTML += `<div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`;
             });
             seasonHTML += `</div>`;
         });
@@ -165,29 +179,25 @@
         document.getElementById('details-overlay').style.display = 'block';
     }
 
+    // --- NO TIMER, DIRECT PLAY ---
     function playVid(url) {
-        currentVideoUrl = url;
         document.getElementById('details-overlay').style.display = 'none';
-        
-        // Timer show karo
-        document.getElementById('ad-gate').style.display = 'flex';
-        let t = 15;
-        document.getElementById('countdown').innerText = t;
-
-        const timer = setInterval(() => {
-            t--; 
-            document.getElementById('countdown').innerText = t;
-            if(t <= 0) { 
-                clearInterval(timer); 
-                document.getElementById('ad-gate').style.display = 'none';
-                document.getElementById('video-frame').src = currentVideoUrl; 
-                document.getElementById('player-ui').style.display = 'block'; 
-            }
-        }, 1000);
+        document.getElementById('video-frame').src = url; 
+        document.getElementById('player-ui').style.display = 'block'; 
     }
 
-    function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
     function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
+    function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
+    function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
+    function toggleAbout() { 
+        const about = document.getElementById('about-modal');
+        about.style.display = (about.style.display === 'block') ? 'none' : 'block';
+    }
+    function searchMovies() {
+        let term = document.getElementById('searchInput').value.toLowerCase();
+        displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
+    }
+
     window.onload = () => { displayContent(database); };
 </script>
 </body>
