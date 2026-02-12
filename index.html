@@ -3,110 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>IndiPlex | Watch Latest Bollywood & South Movies Online</title>
-    <meta name="description" content="IndiPlex par dekhiye latest Bollywood, South Indian movies aur Web Series bilkul free. Fast streaming and premium quality.">
-    <meta name="keywords" content="IndiPlex, Bollywood Movies, South Indian Movies, Hindi Dubbed, Free Streaming">
-    <meta name="author" content="IndiPlex Team">
-
+    <title>IndiPlex | Series & Movies</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --brand: #e50914; --bg: #050505; --card: #121212; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; overflow-x: hidden; }
-        
-        /* NAVIGATION */
-        nav { padding: 15px 5%; background: rgba(0,0,0,0.95); display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--brand); position: sticky; top: 0; z-index: 100; }
-        .logo { color: var(--brand); font-size: 28px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
-        
-        /* SEARCH BAR */
-        .search-container { padding: 20px 5%; text-align: center; }
-        #movieSearch { width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 25px; border: none; background: #222; color: white; outline: none; font-size: 16px; border: 1px solid #333; }
-        #movieSearch:focus { border-color: var(--brand); }
-
-        /* MOVIE GRID */
-        .container { padding: 10px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .movie-card { background: var(--card); border-radius: 10px; overflow: hidden; transition: 0.3s; cursor: pointer; border: 1px solid #222; }
-        .movie-card:hover { transform: translateY(-5px); border-color: var(--brand); box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3); }
-        .movie-card img { width: 100%; height: 240px; object-fit: cover; }
-        .movie-card h3 { font-size: 14px; padding: 12px; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        /* PLAYER POPUP */
-        #player { position: fixed; inset: 0; background: #000; display: none; z-index: 2000; }
-        #close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 35px; cursor: pointer; background: rgba(229, 9, 20, 0.8); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; z-index: 2100; }
+        :root { --brand: #e50914; --bg: #050505; --card: #121212; --text: #ffffff; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; }
+        nav { padding: 15px 5%; background: #000; border-bottom: 2px solid var(--brand); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { color: var(--brand); font-size: 26px; font-weight: 900; text-decoration: none; }
+        .container { padding: 20px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .item-card { background: var(--card); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid #222; }
+        .item-card img { width: 100%; height: 230px; object-fit: cover; }
+        .item-card h3 { font-size: 14px; padding: 10px; margin: 0; text-align: center; }
+        #details-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.98); display: none; z-index: 2000; overflow-y: auto; padding: 40px 5%; }
+        .details-header { display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
+        .details-header img { width: 200px; border-radius: 10px; }
+        .close-btn { position: fixed; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: var(--brand); background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .season-container { background: #111; border-radius: 10px; padding: 20px; margin-bottom: 20px; border-left: 4px solid var(--brand); }
+        .episode-btn { display: block; padding: 12px; background: #222; margin: 8px 0; color: white; text-decoration: none; border-radius: 5px; }
+        #video-player-container { position: fixed; inset: 0; background: #000; display: none; z-index: 3000; }
         iframe { width: 100%; height: 100%; border: none; }
-        
-        @media (max-width: 600px) {
-            .container { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
-            .movie-card img { height: 200px; }
-        }
     </style>
 </head>
 <body>
 
-<nav><a href="#" class="logo">IndiPlex</a><i class="fa-solid fa-magnifying-glass"></i></nav>
+<nav><a href="#" class="logo">INDIPLEX</a></nav>
 
-<div class="search-container">
-    <input type="text" id="movieSearch" placeholder="Search Bollywood, South, Web Series..." onkeyup="searchMovies()">
+<div class="container" id="main-grid"></div>
+
+<div id="details-overlay">
+    <div class="close-btn" onclick="closeDetails()">&times;</div>
+    <div id="details-body"></div>
 </div>
 
-<div class="container" id="movie-grid">
-    </div>
-
-<div id="player">
-    <div id="close-btn" onclick="closePlayer()">&times;</div>
-    <iframe id="vid-frame" allowfullscreen allow="autoplay"></iframe>
+<div id="video-player-container">
+    <div style="position:absolute; top:20px; left:20px; z-index:3100; background:red; padding:10px; cursor:pointer;" onclick="closePlayer()">BACK</div>
+    <iframe id="main-iframe" allowfullscreen></iframe>
 </div>
 
-<script src="movies.js"></script>
+<script src="series/mirzapur.js"></script>
 
 <script>
-    const grid = document.getElementById('movie-grid');
+    // STEP B: ADD VARIABLE NAMES HERE
+    const database = [
+        mirzapurData
+    ];
 
-    function displayMovies(moviesList) {
+    const grid = document.getElementById('main-grid');
+
+    function displayContent(items) {
         grid.innerHTML = '';
-        if(moviesList.length === 0) {
-            grid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">No movies found. Try searching something else!</p>';
-            return;
-        }
-        moviesList.forEach(movie => {
+        items.forEach(item => {
             const card = document.createElement('div');
-            card.className = 'movie-card';
-            card.innerHTML = `<img src="${movie.poster}" alt="${movie.title}"><h3>${movie.title}</h3>`;
-            card.onclick = () => playMovie(movie.link);
+            card.className = 'item-card';
+            card.innerHTML = `<img src="${item.poster}"><h3>${item.title}</h3>`;
+            card.onclick = () => openDetails(item);
             grid.appendChild(card);
         });
     }
 
-    function searchMovies() {
-        let input = document.getElementById('movieSearch').value.toLowerCase();
-        let filtered = myMovies.filter(m => m.title.toLowerCase().includes(input));
-        displayMovies(filtered);
+    function openDetails(item) {
+        let seasonHTML = '';
+        item.seasons.forEach(s => {
+            seasonHTML += `<div class="season-container"><h3>${s.name}</h3>`;
+            s.episodes.forEach(ep => {
+                seasonHTML += `<a href="javascript:void(0)" class="episode-btn" onclick="playVideo('${ep.link}')">${ep.title}</a>`;
+            });
+            seasonHTML += `</div>`;
+        });
+
+        document.getElementById('details-body').innerHTML = `
+            <div class="details-header">
+                <img src="${item.poster}">
+                <div><h1>${item.title}</h1><p>${item.description}</p></div>
+            </div>
+            ${seasonHTML}
+        `;
+        document.getElementById('details-overlay').style.display = 'block';
     }
 
-    function playMovie(url) {
-        if(!url || url === "PASTE_LINK_HERE") {
-            alert("Bhai, is movie ka link abhi update nahi hua hai!");
-            return;
-        }
-        document.getElementById('vid-frame').src = url;
-        document.getElementById('player').style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Stop scrolling background
+    function playVideo(url) {
+        document.getElementById('main-iframe').src = url;
+        document.getElementById('video-player-container').style.display = 'block';
     }
 
-    function closePlayer() {
-        document.getElementById('player').style.display = 'none';
-        document.getElementById('vid-frame').src = '';
-        document.body.style.overflow = 'auto'; // Enable scrolling
-    }
-
-    // Load movies on start
-    window.onload = () => {
-        if(typeof myMovies !== 'undefined') {
-            displayMovies(myMovies);
-        } else {
-            grid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">Error: movies.js file not found!</p>';
-        }
-    }
+    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
+    function closePlayer() { document.getElementById('video-player-container').style.display = 'none'; document.getElementById('main-iframe').src = ''; }
+    
+    window.onload = () => displayContent(database);
 </script>
 </body>
 </html>
