@@ -24,40 +24,38 @@
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- 1. LUXURY INTRO & MOTTO --- */
+        /* --- 1. INTRO & MOTTO (RESTORED) --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-        .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
-        @keyframes ambientPulse { 0% { transform: scale(1) translate(-5%, -5%); opacity: 0.5; } 100% { transform: scale(1.2) translate(5%, 5%); opacity: 0.8; } }
+        .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.2) 0%, transparent 70%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
         .intro-content { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 2; }
-        .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 12vw, 8rem); font-weight: 900; color: #fff; letter-spacing: 15px; margin: 0; animation: luxuryGlow 3s ease-in-out forwards; }
-        .motto { font-size: 0.75rem; color: #888; letter-spacing: 8px; margin-top: 20px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1.2s; }
-        @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
+        .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; color: #fff; letter-spacing: 15px; margin: 0; animation: luxuryGlow 3s ease-in-out forwards; }
+        .motto { font-size: 0.7rem; color: #888; letter-spacing: 6px; margin-top: 20px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1.2s; }
+        @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 10px; color: var(--red); } }
         @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
+        @keyframes ambientPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.3); opacity: 0.8; } }
 
-        /* --- 2. PREMIUM NAV --- */
-        nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(30px); border-bottom: 1px solid var(--glass-border); }
-        .logo-nav { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 32px; background: linear-gradient(to bottom, #fff 30%, #ff0000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; cursor: pointer; filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .search-wrapper input { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 10px 20px; border-radius: 8px; color: #fff; outline: none; width: 120px; transition: 0.4s; }
-        .search-wrapper input:focus { width: 180px; border-color: var(--red); }
+        /* --- 2. NAV & LOGO --- */
+        nav { position: fixed; top: 0; width: 100%; height: 80px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); }
+        .logo-nav { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 30px; background: linear-gradient(to bottom, #fff 20%, #ff0000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; cursor: pointer; filter: drop-shadow(0 0 12px rgba(255,0,0,0.6)); }
 
-        /* --- 3. SIDE MENU (WITH ABOUT & CREDIT) --- */
-        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(40px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 80px 30px; box-sizing: border-box; border-left: 1px solid var(--glass-border); }
+        /* --- 3. SIDEBAR & ABOUT (RESTORED) --- */
+        #side-menu { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(50px); z-index: 6000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 80px 30px; border-left: 1px solid var(--glass-border); }
         #side-menu.active { right: 0; }
-        .menu-item { padding: 18px 0; font-size: 13px; font-family: 'Montserrat'; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; color: #777; display: flex; align-items: center; gap: 15px; }
-        .menu-item:hover { color: #fff; border-bottom-color: var(--red); }
-        .about-box { margin-top: 30px; font-size: 11px; color: #555; line-height: 1.6; border-top: 1px solid #222; padding-top: 20px; }
+        .menu-item { padding: 18px 0; font-size: 13px; font-family: 'Montserrat'; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; color: #aaa; transition: 0.3s; }
+        .menu-item:hover { color: #fff; padding-left: 10px; border-bottom-color: var(--red); }
+        .about-section { margin-top: 40px; border-top: 1px solid #222; padding-top: 25px; }
+        .about-title { font-family: 'Orbitron'; font-size: 12px; color: var(--red); margin-bottom: 10px; }
+        .about-text { font-size: 11px; color: #666; line-height: 1.8; text-transform: none; }
 
-        /* --- 4. RGB NEON CARDS (MOVING STRIPS) --- */
+        /* --- 4. NEON MOVING STRIP CARDS (RESTORED) --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 120px; }
-        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 40px; }
+        .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 40px; }
         
-        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 3px; transition: 0.5s; }
-        .card:hover { transform: scale(1.05); filter: brightness(1.2); }
+        .card { position: relative; border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; padding: 3px; transition: 0.5s; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        .card:hover { transform: scale(1.06); filter: brightness(1.1); }
         
-        /* THE MOVING NEON STRIP LOGIC */
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(from 0deg, transparent, var(--red), var(--neon-blue), var(--red), transparent);
@@ -66,10 +64,10 @@
         .card::after { content: ""; position: absolute; inset: 4px; background: #000; border-radius: 17px; z-index: -1; }
         @keyframes rotateStrip { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .card img { width: 100%; height: 300px; object-fit: cover; border-radius: 17px 17px 0 0; }
-        .card h3 { position: relative; z-index: 2; font-size: 15px; font-family: 'Montserrat'; font-weight: 900; padding: 15px; text-align: center; margin: 0; background: #000; color: #fff; letter-spacing: 1px; }
+        .card img { width: 100%; height: 300px; object-fit: cover; border-radius: 16px 16px 0 0; }
+        .card h3 { padding: 15px; text-align: center; margin: 0; font-family: 'Montserrat'; font-weight: 900; background: #000; font-size: 14px; color: #efefef; }
 
-        /* --- 5. MODALS --- */
+        /* --- 5. OVERLAYS & PLAYER --- */
         #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.99); backdrop-filter:blur(40px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
         #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 25000; }
         #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); display: none; justify-content: center; align-items: center; z-index: 20000; }
@@ -91,44 +89,50 @@
 <div id="home-page">
     <nav>
         <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
-        <div class="nav-right">
-            <div class="search-wrapper"><input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()"></div>
-            <div class="menu-btn" onclick="toggleMenu()" style="cursor:pointer; font-size:24px;"><i class="fa-solid fa-bars-staggered"></i></div>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search movies..." onkeyup="searchMovies()" 
+                style="background:rgba(255,255,255,0.05); border:1px solid #333; padding:10px 15px; border-radius:10px; color:#fff; outline:none; font-size:13px;">
+            </div>
+            <div onclick="toggleMenu()" style="cursor:pointer; font-size:24px; color:#fff;"><i class="fa-solid fa-bars-staggered"></i></div>
         </div>
     </nav>
     <div class="container" id="main-grid"></div>
 </div>
 
 <div id="side-menu">
-    <div onclick="toggleMenu()" style="position:absolute; top:30px; right:30px; font-size:30px; cursor:pointer;">&times;</div>
-    <div class="menu-item" onclick="location.reload()"><i class="fa fa-home"></i> Home</div>
-    <div class="menu-item" onclick="toggleAbout()"><i class="fa fa-info-circle"></i> About Project</div>
-    <div class="menu-item" onclick="document.getElementById('login-modal').style.display='flex'"><i class="fa fa-lock"></i> Admin Console</div>
+    <div onclick="toggleMenu()" style="float:right; font-size:35px; cursor:pointer; color:var(--red);">&times;</div>
+    <div style="clear:both; margin-top:40px;"></div>
+    <div class="menu-item" onclick="location.reload()">HOME</div>
+    <div class="menu-item" onclick="document.getElementById('login-modal').style.display='flex'">ADMIN CONSOLE</div>
     
-    <div class="about-box" id="about-text">
-        <strong>MOTIVE:</strong> To provide a secure, ad-responsive aesthetic cinema experience without compromising user privacy. <br><br>
-        <strong>CREDITS:</strong> Developed by INDIPLEX Team. <br>
-        <strong>VERSION:</strong> 3.0 (Premium)
+    <div class="about-section">
+        <div class="about-title">PROJECT ABOUT</div>
+        <div class="about-text">
+            <strong>MOTIVE:</strong> To build a high-end cinema interface that values aesthetics and privacy. No tracking, just pure entertainment.<br><br>
+            <strong>CREDITS:</strong> Created by INDIPLEX Dev Team. <br>
+            <strong>VERSION:</strong> 5.0 (Vanta + Neon Ready)
+        </div>
     </div>
 </div>
 
 <div id="details-overlay">
-    <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red);">&times;</div>
+    <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:45px; cursor:pointer; color:var(--red); z-index:8500;">&times;</div>
     <div id="details-body"></div>
-</div>
-
-<div id="login-modal">
-    <div class="modal-box">
-        <h2 style="color:var(--red); font-family:'Orbitron';">AUTHENTICATION</h2>
-        <input type="text" id="admin-user" placeholder="ID" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <input type="password" id="admin-pass" placeholder="KEY" style="width:100%; padding:12px; margin:10px 0; background:#111; color:white; border:1px solid #333;">
-        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; cursor:pointer; font-weight:bold;">ACCESS</button>
-    </div>
 </div>
 
 <div id="player-ui">
     <div onclick="closePlayer()" style="position:fixed; top:25px; left:25px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-chevron-left"></i></div>
     <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
+</div>
+
+<div id="login-modal">
+    <div class="modal-box">
+        <h2 style="color:var(--red); font-family:'Orbitron';">AUTHENTICATE</h2>
+        <input type="text" id="admin-user" placeholder="USER ID" style="width:100%; padding:12px; margin:8px 0; background:#111; color:#fff; border:1px solid #333; border-radius:5px;">
+        <input type="password" id="admin-pass" placeholder="SECRET KEY" style="width:100%; padding:12px; margin:8px 0; background:#111; color:#fff; border:1px solid #333; border-radius:5px;">
+        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:#fff; border:none; margin-top:10px; cursor:pointer; font-weight:900; border-radius:5px;">ACCESS</button>
+    </div>
 </div>
 
 <script src="series/mirzapur.js"></script>
@@ -137,17 +141,28 @@
 <script>
     let clicks = 0;
 
-    // --- INITIALIZE ---
+    // --- APP START ---
     window.onload = () => {
         setTimeout(() => { 
             document.getElementById('intro').classList.add('hide'); 
             document.getElementById('home-page').style.display = 'block';
-            VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xff0000, backgroundColor: 0x0, points: 12 });
+            if(typeof VANTA !== 'undefined') {
+                VANTA.NET({ 
+                    el: "#vanta-canvas", 
+                    mouseControls: true, 
+                    touchControls: true, 
+                    color: 0xff0000, 
+                    backgroundColor: 0x0, 
+                    points: 12,
+                    maxDistance: 20.00,
+                    spacing: 16.00
+                });
+            }
         }, 6000);
         displayContent(database);
     };
 
-    // --- ADMIN TRIGGER ---
+    // --- ADMIN ACCESS ---
     document.getElementById('adminTrigger').addEventListener('click', () => {
         clicks++;
         if(clicks === 5) { document.getElementById('login-modal').style.display = 'flex'; }
@@ -156,8 +171,8 @@
 
     function checkLogin() {
         if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
-            alert("Admin Access Granted"); document.getElementById('login-modal').style.display = 'none';
-        } else { alert("Access Denied"); }
+            alert("Welcome Admin"); document.getElementById('login-modal').style.display = 'none';
+        } else { alert("Invalid Credentials"); }
     }
 
     const database = [ mirzapurData, moneyHeistData ];
@@ -175,15 +190,17 @@
     function openDetails(title) {
         const item = database.find(m => m.title === title);
         let seasonHTML = item.seasons.map(s => `
-            <div style="margin-top:40px; border-left:2px solid var(--red); padding-left:25px;">
-                <h3 style="font-family:'Orbitron'; color:#ff0000; font-size:14px; letter-spacing:2px;">${s.name}</h3>
+            <div style="margin-top:40px; border-left:3px solid var(--red); padding-left:25px;">
+                <h3 style="font-family:'Orbitron'; color:var(--red); font-size:15px; letter-spacing:2px;">${s.name}</h3>
                 ${s.episodes.map(ep => `
-                    <div style="padding:18px; background:rgba(255,255,255,0.03); margin:10px 0; border-radius:12px; cursor:pointer; border:1px solid rgba(255,255,255,0.05);" 
+                    <div style="padding:20px; background:rgba(255,255,255,0.03); margin:12px 0; border-radius:15px; cursor:pointer; border:1px solid rgba(255,255,255,0.05); transition:0.3s;" 
+                    onmouseover="this.style.background='rgba(255,255,255,0.08)'" 
+                    onmouseout="this.style.background='rgba(255,255,255,0.03)'"
                     onclick="playVid('${ep.link}')">${ep.title}</div>
                 `).join('')}
             </div>
         `).join('');
-        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'; letter-spacing:5px;">${item.title}</h1>${seasonHTML}`;
+        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Orbitron'; font-size:2.5rem; letter-spacing:5px;">${item.title}</h1>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
     }
 
@@ -193,10 +210,6 @@
     }
 
     function toggleMenu() { document.getElementById('side-menu').classList.toggle('active'); }
-    function toggleAbout() { 
-        const txt = document.getElementById('about-text');
-        txt.style.color = (txt.style.color === 'white') ? '#555' : 'white';
-    }
     function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
     function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
     
