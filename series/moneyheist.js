@@ -5,9 +5,9 @@ const moneyHeistData = {
     description: "Eight thieves take hostages and lock themselves in the Royal Mint of Spain as a criminal mastermind manipulates the police to carry out his plan.",
     seasons: [
         {
-            name: "Season 1",
+            name: "Season 1 Combined ",
             episodes: [
-                { title: "Episode 1", link: "https://drive.google.com/file/d/1N8X7bxfUOriR4iPKfM-hdKkLtkoETVBA/preview" }
+                { title: "watch online / download ", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25238/Money+Heist+S01+COMBINED+720p+NF+WEB-DL+DDP5.1+H+264+~VI.mkv?hash=AgADKA" }
                 // Baaki episodes...
             ]
         }
