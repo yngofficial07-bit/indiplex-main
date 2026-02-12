@@ -22,53 +22,35 @@
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- INTRO --- */
+        /* Intro Section */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; overflow: hidden; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-
-        .intro-bg-lights {
-            position: absolute; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%);
-            filter: blur(80px); animation: ambientPulse 4s infinite alternate;
-        }
+        .intro-bg-lights { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.18) 0%, transparent 60%); filter: blur(80px); animation: ambientPulse 4s infinite alternate; }
         @keyframes ambientPulse { 0% { transform: scale(1) translate(-5%, -5%); opacity: 0.5; } 100% { transform: scale(1.2) translate(5%, 5%); opacity: 0.8; } }
-
         .intro-content { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 2; }
         .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(3.5rem, 12vw, 8rem); font-weight: 900; color: #fff; letter-spacing: 15px; margin: 0; animation: luxuryGlow 3s ease-in-out forwards; }
-        .motto { font-size: 0.75rem; color: #888; letter-spacing: 8px; margin-top: 20px; opacity: 0; transform: translateY(10px); animation: mottoReveal 2s ease-out forwards 1.2s; }
-
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
-        @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- NAVBAR & DRAWER --- */
+        /* UI Elements */
         nav { position: fixed; top: 0; width: 100%; height: 75px; z-index: 5000; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); }
-        .logo-nav { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: var(--red); text-decoration: none; letter-spacing: 2px; cursor: pointer; }
-        
+        .logo-nav { font-family: 'Montserrat'; font-weight: 900; font-size: 28px; color: var(--red); text-decoration: none; letter-spacing: 2px; cursor: pointer; user-select: none; }
         .nav-right { display: flex; align-items: center; gap: 25px; }
         .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-wrapper input { background: var(--glass); border: 1px solid var(--glass-border); padding: 10px 15px 10px 45px; border-radius: 50px; color: #fff; width: 140px; transition: 0.5s; outline: none; font-size: 14px; }
-        .search-wrapper input:focus { width: 250px; background: rgba(0,0,0,0.7); border-color: var(--red); }
+        .search-wrapper input { background: var(--glass); border: 1px solid var(--glass-border); padding: 10px 15px 10px 45px; border-radius: 50px; color: #fff; width: 140px; transition: 0.5s; outline: none; }
+        .search-wrapper input:focus { width: 250px; border-color: var(--red); }
         .search-wrapper i { position: absolute; left: 18px; color: rgba(255,255,255,0.4); }
 
-        #side-drawer { position: fixed; top: 0; right: -400px; width: 340px; height: 100%; background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(40px); z-index: 6000; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); padding: 80px 30px; border-left: 1px solid var(--glass-border); }
-        #side-drawer.active { right: 0; }
-        .close-drawer { position: absolute; top: 25px; right: 25px; font-size: 35px; cursor: pointer; color: var(--red); }
-        .owner-name { font-size: 50px; font-weight: 700; font-family: 'Meow Script'; color: #fff; }
-
-        /* --- GRID --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         #home-page { display: none; position: relative; z-index: 10; padding-top: 110px; }
         .container { padding: 0 5% 50px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; }
-        
-        .card { position: relative; border-radius: 15px; overflow: hidden; background: #000; transition: 0.5s; cursor: pointer; border: 2px solid transparent; }
-        .card::after { content: ""; position: absolute; inset: 0; border-radius: 15px; padding: 2px; background: linear-gradient(45deg, var(--saffron), var(--white), var(--green), var(--saffron)); background-size: 400% 400%; animation: moveGradient 4s linear infinite; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
-        @keyframes moveGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .card { position: relative; border-radius: 15px; overflow: hidden; background: #000; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
         .card img { width: 100%; height: 260px; object-fit: cover; }
         .card h3 { font-size: 14px; padding: 15px; text-align: center; margin: 0; background: rgba(0,0,0,0.8); }
 
-        /* --- MODALS --- */
-        #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(15px); }
-        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 320px; }
+        /* Modals */
+        #details-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%; }
+        #ad-gate, #login-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 20000; backdrop-filter: blur(10px); }
+        .modal-box { background: #111; padding: 40px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 300px; }
         #countdown { font-size: 50px; font-weight: 900; color: var(--red); margin: 15px 0; }
         #play-after-ad { display: none; background: var(--red); color: white; border: none; padding: 15px 0; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
@@ -81,23 +63,14 @@
     <div class="intro-bg-lights"></div>
     <div class="intro-content">
         <h1 class="premium-name">INDIPLEX</h1>
-        <div class="motto">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
     </div>
 </div>
 
 <div id="vanta-canvas"></div>
 
-<div id="side-drawer">
-    <div class="close-drawer" onclick="toggleSide()">&times;</div>
-    <div style="text-align: center;">
-        <h2 class="owner-name">Y07</h2>
-        <p style="font-size:12px; color:var(--red);">DEVELOPER & OWNER</p>
-    </div>
-</div>
-
 <div id="home-page">
     <nav>
-        <div class="logo-nav">INDIPLEX</div>
+        <div class="logo-nav" id="adminTrigger">INDIPLEX</div>
         <div class="nav-right">
             <div class="search-wrapper">
                 <i class="fa fa-search"></i>
@@ -109,14 +82,9 @@
     <div class="container" id="main-grid"></div>
 </div>
 
-<div id="details-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.98); backdrop-filter:blur(30px); display:none; z-index:8000; overflow-y:auto; padding:80px 5%;">
+<div id="details-overlay">
     <div onclick="closeDetails()" style="position:fixed; top:25px; right:35px; font-size:40px; cursor:pointer; color:var(--red);">&times;</div>
     <div id="details-body"></div>
-</div>
-
-<div id="player-ui">
-    <div onclick="closePlayer()" style="position:fixed; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-circle-left"></i></div>
-    <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
 </div>
 
 <div id="ad-gate">
@@ -127,30 +95,62 @@
     </div>
 </div>
 
+<div id="login-modal">
+    <div class="modal-box">
+        <h2 style="color:var(--red);">ADMIN LOGIN</h2>
+        <input type="text" id="admin-user" placeholder="Username">
+        <input type="password" id="admin-pass" placeholder="Password">
+        <button onclick="checkLogin()" style="width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:10px;">Verify</button>
+        <p onclick="closeLogin()" style="font-size:12px; margin-top:15px; cursor:pointer; color:#555;">Dismiss</p>
+    </div>
+</div>
+
+<div id="player-ui">
+    <div onclick="closePlayer()" style="position:fixed; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:30000;"><i class="fa-solid fa-circle-left"></i></div>
+    <iframe id="video-frame" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>
+</div>
+
 <script src="series/mirzapur.js"></script>
 <script src="series/moneyheist.js"></script>
 
 <script>
     let currentVideoUrl = "";
+    let clicks = 0;
 
-    // 1. INTRO
+    // Intro Logic
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
         initVanta();
-    }, 6000);
+    }, 4000);
 
     function initVanta() {
-        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0, points: 12.0, maxDistance: 20.0, spacing: 16.0 });
+        VANTA.NET({ el: "#vanta-canvas", mouseControls: true, touchControls: true, color: 0xe50914, backgroundColor: 0x0 });
     }
 
-    function toggleSide() { document.getElementById('side-drawer').classList.toggle('active'); }
+    // Admin Trigger (5 Clicks on Logo)
+    document.getElementById('adminTrigger').addEventListener('click', () => {
+        clicks++;
+        if(clicks === 5) {
+            document.getElementById('login-modal').style.display = 'flex';
+            clicks = 0;
+        }
+        setTimeout(() => { clicks = 0; }, 2000);
+    });
 
-    // 2. CONTENT DISPLAY (Purana logic wapas)
+    function checkLogin() {
+        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
+            localStorage.setItem("isAdmin", "true");
+            alert("Admin Mode ON!");
+            location.reload();
+        } else { alert("Wrong!"); }
+    }
+    function closeLogin() { document.getElementById('login-modal').style.display = 'none'; }
+
+    // Content Display
     const database = [ mirzapurData, moneyHeistData ];
-    const grid = document.getElementById('main-grid');
-
     function displayContent(items) {
+        const grid = document.getElementById('main-grid');
         grid.innerHTML = '';
         items.forEach(item => {
             const card = document.createElement('div');
@@ -161,46 +161,37 @@
         });
     }
 
-    function searchMovies() {
-        let term = document.getElementById('searchInput').value.toLowerCase();
-        displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
-    }
-
     function openDetails(item) {
         let seasonHTML = '';
         item.seasons.forEach(s => {
             seasonHTML += `<div style="margin-top:30px; border-left:4px solid var(--red); padding-left:20px;"><h3>${s.name}</h3>`;
             s.episodes.forEach(ep => {
-                // FIXED: Call playVid which handles the Timer
                 seasonHTML += `<div style="padding:15px; background:rgba(255,255,255,0.05); margin:8px 0; border-radius:12px; cursor:pointer;" onclick="playVid('${ep.link}')">${ep.title}</div>`;
             });
             seasonHTML += `</div>`;
         });
-        document.getElementById('details-body').innerHTML = `<h1 style="font-family:'Montserrat'; font-size:40px; color:var(--red);">${item.title}</h1><p style="color:#888;">${item.description}</p>${seasonHTML}`;
+        document.getElementById('details-body').innerHTML = `<h1>${item.title}</h1><p>${item.description}</p>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
-        document.body.style.overflow = 'hidden';
     }
 
-    // 3. THE FIX: Play Video & Timer
     function playVid(url) {
         currentVideoUrl = url;
-        // Step 1: List band karo
         document.getElementById('details-overlay').style.display = 'none';
         
-        // Step 2: Timer dikhao
-        document.getElementById('ad-gate').style.display = 'flex';
-        let timeLeft = 15;
-        document.getElementById('countdown').innerText = timeLeft;
-        document.getElementById('play-after-ad').style.display = 'none';
-
-        const timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById('countdown').innerText = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                document.getElementById('play-after-ad').style.display = 'block';
-            }
-        }, 1000);
+        // Admin Bypass
+        if (localStorage.getItem("isAdmin") === "true") {
+            startMovie();
+        } else {
+            document.getElementById('ad-gate').style.display = 'flex';
+            let t = 15;
+            document.getElementById('countdown').innerText = t;
+            document.getElementById('play-after-ad').style.display = 'none';
+            const timer = setInterval(() => {
+                t--;
+                document.getElementById('countdown').innerText = t;
+                if(t <= 0) { clearInterval(timer); document.getElementById('play-after-ad').style.display = 'block'; }
+            }, 1000);
+        }
     }
 
     function startMovie() {
@@ -209,8 +200,12 @@
         document.getElementById('player-ui').style.display = 'block'; 
     }
 
-    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; document.body.style.overflow = 'auto'; }
+    function closeDetails() { document.getElementById('details-overlay').style.display = 'none'; }
+    function closePlayer() { document.getElementById('player-ui').style.display = 'none'; document.getElementById('video-frame').src = ''; }
+    function searchMovies() {
+        let term = document.getElementById('searchInput').value.toLowerCase();
+        displayContent(database.filter(m => m.title.toLowerCase().includes(term)));
+    }
 
     window.onload = () => { displayContent(database); };
 </script>
