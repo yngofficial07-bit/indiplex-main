@@ -1,20 +1,14 @@
-/* series/moneyheist.js */
 const moneyHeistData = {
-    title: "Money Heist (hindi)",
-    poster: "https://m.media-amazon.com/images/M/MV_BNDJjNS00ZGMxLWFkYTAtZWRmYmFhZmU0NzZkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
-    description: "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+    title: "Money Heist",
+    // Tumhara Direct HD Link yahan hai:
+    poster: "https://iili.io/q9UuY5F.png", 
+    description: "Eight thieves take hostages and lock themselves in the Royal Mint of Spain as a criminal mastermind manipulates the police to carry out his plan.",
     seasons: [
         {
             name: "Season 1",
             episodes: [
-                { title: "Episode 1: Part 1", link: "https://www.youtube.com/embed/hMANIarjT50" },
-                { title: "Episode 2: Part 2", link: "https://www.youtube.com/embed/XXXXXX" }
-            ]
-        },
-        {
-            name: "Season 2",
-            episodes: [
-                { title: "Episode 1: New Plan", link: "https://www.youtube.com/embed/XXXXXX" }
+                { title: "Episode 1", link: "https://drive.google.com/file/d/1N8X7bxfUOriR4iPKfM-hdKkLtkoETVBA/preview" }
+                // Baaki episodes...
             ]
         }
     ]
