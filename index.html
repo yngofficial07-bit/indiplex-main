@@ -16,52 +16,55 @@
         
         body, html { margin: 0; padding: 0; background: #000; color: white; font-family: 'Roboto', sans-serif; overflow-x: hidden; height: 100%; }
 
-        /* --- EXACT LUXURY INTRO (NO Y07) --- */
+        /* --- INTRO --- */
         #intro { height: 100vh; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; position: fixed; z-index: 9999; transition: opacity 1.2s; }
         #intro.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .intro-content { text-align: center; }
-        .premium-name { 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: clamp(2.5rem, 10vw, 6rem); 
-            font-weight: 900; color: #fff; 
-            letter-spacing: 15px; margin: 0; 
-            animation: luxuryGlow 3s ease-in-out forwards; 
-        }
-        .motto { 
-            font-size: 0.8rem; color: #888; letter-spacing: 8px; 
-            margin-top: 20px; opacity: 0; transform: translateY(10px); 
-            animation: mottoReveal 2s ease-out forwards 1.2s; 
-        }
-
+        .premium-name { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 10vw, 6rem); font-weight: 900; color: #fff; letter-spacing: 15px; animation: luxuryGlow 3s ease-in-out forwards; }
         @keyframes luxuryGlow { 0% { opacity: 0; letter-spacing: 30px; } 100% { letter-spacing: 12px; color: var(--red); } }
-        @keyframes mottoReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- BACKGROUND LAYER --- */
+        /* --- BACKGROUND --- */
         #vanta-canvas { position: fixed; inset: 0; z-index: 1; }
         
-        /* --- MAIN SITE --- */
-        #home-page { display: none; position: relative; z-index: 10; background: transparent; }
+        /* --- MAIN UI --- */
+        #home-page { display: none; position: relative; z-index: 10; }
 
         nav { 
-            padding: 15px 5%; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px);
+            padding: 15px 5%; background: rgba(0,0,0,0.7); backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; 
             justify-content: space-between; align-items: center; position: sticky; top: 0;
         }
         .logo-nav { color: var(--red); font-size: 24px; font-weight: 900; text-decoration: none; font-family: 'Montserrat'; }
 
-        .search-box {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 15px; border-radius: 25px; display: flex; align-items: center; gap: 10px;
-        }
-        .search-box input { background: none; border: none; color: #fff; outline: none; width: 130px; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .menu-dots { font-size: 24px; cursor: pointer; color: white; transition: 0.3s; }
+        .menu-dots:hover { color: var(--red); transform: rotate(90deg); }
 
+        /* --- SIDE DRAWER (ABOUT DEVELOPER) --- */
+        #side-menu {
+            position: fixed; top: 0; right: -350px; width: 300px; height: 100%;
+            background: rgba(15, 15, 15, 0.98); backdrop-filter: blur(25px);
+            z-index: 5000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 40px 25px; border-left: 1px solid rgba(255,255,255,0.1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        #side-menu.open { right: 0; }
+        .close-menu { position: absolute; top: 20px; left: 20px; font-size: 25px; cursor: pointer; color: var(--red); }
+
+        .dev-card { text-align: center; margin-top: 30px; }
+        .dev-tag { background: var(--red); color: white; padding: 4px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+        .dev-name { font-family: 'Montserrat'; font-size: 22px; margin: 15px 0 5px 0; color: #fff; }
+        .dev-role { color: #888; font-size: 12px; letter-spacing: 2px; margin-bottom: 30px; }
+        
+        .motive-box { text-align: left; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .motive-title { color: var(--red); font-size: 14px; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid var(--red); display: inline-block; }
+        .motive-text { color: #ccc; font-size: 13px; line-height: 1.6; font-style: italic; }
+        
+        .ver-tag { position: absolute; bottom: 30px; width: 80%; text-align: center; color: #444; font-size: 11px; font-weight: bold; border-top: 1px solid #222; padding-top: 15px; }
+
+        /* --- GRID --- */
         .container { padding: 30px 5%; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 25px; }
-
-        /* TIRANGA BORDER CARD */
-        .item-card { 
-            position: relative; border-radius: 12px; overflow: hidden; background: rgba(0,0,0,0.7); 
-            transition: 0.4s; cursor: pointer; border: 2px solid transparent;
-        }
+        .item-card { position: relative; border-radius: 12px; overflow: hidden; background: rgba(0,0,0,0.7); transition: 0.4s; cursor: pointer; border: 2px solid transparent; }
         .item-card::after {
             content: ""; position: absolute; inset: 0; border-radius: 12px; padding: 2px;
             background: linear-gradient(45deg, var(--saffron), var(--white), var(--green), var(--saffron));
@@ -70,27 +73,12 @@
             -webkit-mask-composite: xor; mask-composite: exclude;
         }
         @keyframes moveGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
         .item-card img { width: 100%; height: 240px; object-fit: cover; }
         .item-card h3 { font-size: 13px; padding: 12px; text-align: center; margin: 0; background: rgba(0,0,0,0.8); }
         .item-card:hover { transform: translateY(-10px); }
 
-        /* --- ABOUT DEVELOPER SECTION --- */
-        .dev-section { 
-            margin: 50px 5%; padding: 30px; 
-            background: rgba(24, 24, 24, 0.6); 
-            border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px); text-align: center;
-        }
-        .dev-title { font-family: 'Montserrat'; font-size: 20px; color: var(--red); margin-bottom: 15px; }
-        .dev-info { color: #bbb; font-size: 14px; line-height: 1.6; max-width: 700px; margin: 0 auto; }
-
-        /* MODALS & PLAYER */
-        #details-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(30px); display: none; z-index: 2000; overflow-y: auto; padding: 50px 5%; }
-        .close-btn { position: fixed; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: var(--red); }
-        #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 3000; flex-direction: column; }
-        .back-btn-play { position: absolute; top: 20px; left: 20px; font-size: 35px; color: white; cursor: pointer; z-index: 3100; }
-        iframe { width: 100%; height: 100%; border: none; }
+        #details-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.98); backdrop-filter: blur(30px); display: none; z-index: 2000; overflow-y: auto; padding: 50px 5%; }
+        #player-ui { position: fixed; inset: 0; background: #000; display: none; z-index: 6000; flex-direction: column; }
     </style>
 </head>
 <body>
@@ -98,55 +86,67 @@
 <div id="intro">
     <div class="intro-content">
         <h1 class="premium-name">INDIPLEX</h1>
-        <div class="motto">YOUR PRIVACY IS OUR RESPONSIBILITY</div>
     </div>
 </div>
 
 <div id="vanta-canvas"></div>
 
+<div id="side-menu">
+    <div class="close-menu" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+    
+    <div class="dev-card">
+        <span class="dev-tag">CORE COMMAND</span>
+        <h2 class="dev-name">Y07</h2>
+        <p class="dev-role">DEVELOPER & OWNER</p>
+        
+        <div class="motive-box">
+            <div class="motive-title">OUR MISSION</div>
+            <p class="motive-text">
+                "To redefine digital entertainment by breaking the barriers of paid subscriptions. 
+                IndiPlex is built on the foundation of total privacy and absolute freedom. 
+                Your data is yours, and premium content should be accessible to all."
+            </p>
+        </div>
+    </div>
+    
+    <div class="ver-tag">INDIPLEX ENGINE V8.7 STABLE<br>ENCRYPTED & SECURE</div>
+</div>
+
 <div id="home-page">
     <nav>
         <a href="#" class="logo-nav">INDIPLEX</a>
-        <div class="search-box">
-            <i class="fa fa-search" style="color:#888;"></i>
-            <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
+        <div class="nav-right">
+            <div class="search-box">
+                <i class="fa fa-search" style="color:#888;"></i>
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchMovies()">
+            </div>
+            <div class="menu-dots" onclick="toggleMenu()"><i class="fa-solid fa-ellipsis-vertical"></i></div>
         </div>
     </nav>
 
     <div class="container" id="main-grid"></div>
-
-    <div class="dev-section">
-        <div class="dev-title">ABOUT DEVELOPER</div>
-        <div class="dev-info">
-            IndiPlex is a premium streaming platform designed for high-quality entertainment. 
-            Developed with a focus on user privacy and seamless experience. No tracking, no ads, just pure cinema.
-        </div>
-        <div style="margin-top: 20px; color: var(--red); font-weight: bold; letter-spacing: 2px;">V8.7 STABLE</div>
-    </div>
 </div>
 
 <div id="details-overlay">
-    <div class="close-btn" onclick="closeDetails()">&times;</div>
+    <div class="close-btn" style="position:fixed; top:20px; right:25px; font-size:35px; cursor:pointer; color:var(--red);" onclick="closeDetails()">&times;</div>
     <div id="details-body"></div>
 </div>
 
 <div id="player-ui">
-    <div class="back-btn-play" onclick="closePlayer()"><i class="fa-solid fa-circle-arrow-left"></i></div>
-    <iframe id="video-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div style="position:absolute; top:20px; left:20px; font-size:35px; color:white; cursor:pointer; z-index:6100;" onclick="closePlayer()"><i class="fa-solid fa-circle-arrow-left"></i></div>
+    <iframe id="video-frame" allow="autoplay; fullscreen" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>
 </div>
 
 <script src="series/mirzapur.js"></script>
 <script src="series/moneyheist.js"></script>
 
 <script>
-    // Timer
     setTimeout(() => { 
         document.getElementById('intro').classList.add('hide'); 
         document.getElementById('home-page').style.display = 'block';
         initVanta();
     }, 6000);
 
-    // Vanta
     function initVanta() {
         VANTA.NET({
             el: "#vanta-canvas",
@@ -154,6 +154,10 @@
             color: 0xe50914, backgroundColor: 0x0,
             points: 12.00, maxDistance: 22.00, spacing: 16.00
         });
+    }
+
+    function toggleMenu() {
+        document.getElementById('side-menu').classList.toggle('open');
     }
 
     const database = [ mirzapurData, moneyHeistData ];
@@ -186,11 +190,11 @@
             seasonHTML += `</div>`;
         });
         document.getElementById('details-body').innerHTML = `
-            <div style="display:flex; gap:30px; flex-wrap:wrap; align-items:center;">
+            <div style="display:flex; gap:30px; flex-wrap:wrap; align-items:center; margin-top:40px;">
                 <img src="${item.poster}" style="width:180px; border-radius:15px; box-shadow:0 0 30px rgba(0,0,0,0.5);">
                 <div style="flex:1;">
-                    <h1 style="font-size:35px; margin:0; font-family:'Montserrat';">${item.title}</h1>
-                    <p style="color:#aaa;">${item.description}</p>
+                    <h1 style="font-size:35px; margin:0; font-family:'Montserrat'; color:var(--red);">${item.title}</h1>
+                    <p style="color:#aaa; line-height:1.6;">${item.description}</p>
                 </div>
             </div>${seasonHTML}`;
         document.getElementById('details-overlay').style.display = 'block';
