@@ -141,7 +141,7 @@
 
 <script src="series/mirzapur.js"></script>
 <script src="series/moneyheist.js"></script>
-
+<script src="series/mismatched.js"></script>
 <script>
     let clicks = 0;
 
@@ -159,7 +159,7 @@
     });
 
     function checkLogin() {
-        if(document.getElementById('admin-user').value === "Y07" && document.getElementById('admin-pass').value === "secret123") {
+        if(document.getElementById('admin-user').value === "sans" && document.getElementById('admin-pass').value === "0510") {
             localStorage.setItem("isAdmin", "true"); 
             alert("Admin Logged In");
             location.reload();
@@ -172,7 +172,7 @@
         location.reload();
     }
 
-    const database = [ mirzapurData, moneyHeistData ];
+    const database = [ mirzapurData, moneyHeistData, mismatchedData  ];
     function displayContent(items) {
         const grid = document.getElementById('main-grid');
         grid.innerHTML = '';
