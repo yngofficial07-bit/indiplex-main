@@ -6,19 +6,19 @@ const mismatchedData = {
         {
             name: "Season 1",
             episodes: [
-                { title: "Season 1 Combined [Hindi]", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25238/Money+Heist+S01+COMBINED+720p+NF+WEB-DL+DDP5.1+H+264+~VI.mkv?hash=AgADKA" }
+                { title: "Season 1 Combined [Hindi]", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25411/Mismatched_2020_1080p_HEVC_HDRip_Hindi_S01_Complete_NF_Series_.mkv?hash=AgADmR" }
             ]
         }, // <--- Season 1 yahan khatam, comma lagao
         {
             name: "Season 2",
             episodes: [
-                { title: "Season 2 Combined [Hindi]", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25250/Money+Heist+S02+COMBINED+720p+NF+WEB-DL+AAC5.1+AV1+~VI%C5%82%C5%82.mkv?hash=AgAD7Q" }
+                { title: "Season 2 Combined [Hindi]", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25415/Mismatched_S02_COMBINED_720p_10bit_NF_WEBRip_x265_HEVC_Hindi_AAC.mp4?hash=AgADlA" }
             ]
         }, // <--- Season 2 khatam, comma lagao
         {
             name: "Season 3",
             episodes: [
-                { title: "Season 3 Combined [Hindi]", link: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25252/Money+Heist+S03+COMBINED+720p+NF+WEB-DL+AAC5.1+AV1+~VI%C5%82%C5%82.mkv?hash=AgAD8A" }
+                { title: "https://streambotfu-bad36c8490c2.herokuapp.com/watch/25419/Mismatched_2024_S03_COMBINED_720p_NF_WEB_DL_HINDI_AAC2_0_H_264_E.mkv?hash=AgAD4h" }
             ]
         }
       
